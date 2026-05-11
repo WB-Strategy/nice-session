@@ -96,68 +96,66 @@ button{padding:.5rem 1.1rem;border-radius:var(--border-radius-md);font-size:13px
 <div class="logo"><b>William Beasley</b> · Strategic Pricing · Discovery Session</div>
 
 <div class="screen on" id="s-intro">
-  <div class="tag">Pricing Discovery</div>
-  <div class="h1">Finding the balance.</div>
-  <div class="sub">Sustainable pricing lives at the intersection of three forces that constantly pull against each other.</div>
-  <div class="eq">
-    <div class="pill">Customer value</div><div class="x">×</div>
-    <div class="pill">Financial goals</div><div class="x">×</div>
-    <div class="pill">Competitive position</div>
-  </div>
-  <div class="sub">Eight questions across two tracks to answer these questions: 
-  </div>Where is the value?  
-</div>Do you trust the system around it?</div>
-  <button class="btn-p on" onclick="show('s-q');renderQ()">Begin <i class="ti ti-arrow-right" aria-hidden="true"></i></button>
+<div class="tag">Pricing Discovery</div>
+<div class="h1">Finding the balance.</div>
+<div class="sub">Sustainable pricing lives at the intersection of three forces that constantly pull against each other.</div>
+<div class="eq">
+<div class="pill">Customer value</div><div class="x">×</div>
+<div class="pill">Financial goals</div><div class="x">×</div>
+<div class="pill">Competitive position</div>
+</div>
+<div class="sub">Eight questions across two tracks to answer these questions- Where is the value?  Do you trust the system around it?</div>
+<button class="btn-p on" onclick="show('s-q');renderQ()">Begin <i class="ti ti-arrow-right" aria-hidden="true"></i></button>
 </div>
 
 <div class="screen" id="s-q">
-  <div class="prog-wrap"><div class="prog" id="prog"></div></div>
-  <div id="track-badge"></div>
-  <div class="qnum" id="qnum"></div>
-  <div class="qtext" id="qtext"></div>
-  <div class="qsub" id="qsub"></div>
-  <div class="vtabs" id="vtabs"></div>
-  <div class="split-row" id="split"></div>
-  <div class="opts" id="opts"></div>
-  <div class="brow">
-    <button class="btn-g" id="bbk" onclick="goBack()">Back</button>
-    <button class="btn-p" id="bnx" onclick="goNext()">Next</button>
-  </div>
+<div class="prog-wrap"><div class="prog" id="prog"></div></div>
+<div id="track-badge"></div>
+<div class="qnum" id="qnum"></div>
+<div class="qtext" id="qtext"></div>
+<div class="qsub" id="qsub"></div>
+<div class="vtabs" id="vtabs"></div>
+<div class="split-row" id="split"></div>
+<div class="opts" id="opts"></div>
+<div class="brow">
+<button class="btn-g" id="bbk" onclick="goBack()">Back</button>
+<button class="btn-p" id="bnx" onclick="goNext()">Next</button>
+</div>
 </div>
 
 <div class="screen" id="s-result">
-  <div class="rh">Based on what I'm hearing</div>
-  <div class="rt" id="rt"></div>
-  <div class="rb" id="rb"></div>
+<div class="rh">Based on what I'm hearing</div>
+<div class="rt" id="rt"></div>
+<div class="rb" id="rb"></div>
 
-  <div class="firebox" id="firebox">
-    <div class="fire-lbl">🔥 This can't wait</div>
-    <div class="fire-title">Sales needs something to quote. Today.</div>
-    <div class="fire-items">
-      <div class="fi"><div class="fi-dot"></div><div class="fi-text">Interim SKU: <b>"AI Interaction Bundle"</b> — configurable in CPQ within 2 weeks</div></div>
-      <div class="fi"><div class="fi-dot"></div><div class="fi-text">Price: per-resolution consumption above base threshold — list price to be confirmed, placeholder rate available immediately</div></div>
-      <div class="fi"><div class="fi-dot"></div><div class="fi-text">Discount authority: standard band applies until Pricing Council sets AI-specific guardrails</div></div>
-      <div class="fi"><div class="fi-dot"></div><div class="fi-text">Exception routing: anything above $X ACV goes to Deal Desk — no rep-level improvisation</div></div>
-    </div>
-  </div>
+<div class="firebox" id="firebox">
+<div class="fire-lbl">🔥 This can't wait</div>
+<div class="fire-title">Sales needs something to quote. Today.</div>
+<div class="fire-items">
+<div class="fi"><div class="fi-dot"></div><div class="fi-text">Interim SKU: <b>"AI Interaction Bundle"</b> — configurable in CPQ within 2 weeks</div></div>
+<div class="fi"><div class="fi-dot"></div><div class="fi-text">Price: per-resolution consumption above base threshold — list price to be confirmed, placeholder rate available immediately</div></div>
+<div class="fi"><div class="fi-dot"></div><div class="fi-text">Discount authority: standard band applies until Pricing Council sets AI-specific guardrails</div></div>
+<div class="fi"><div class="fi-dot"></div><div class="fi-text">Exception routing: anything above $X ACV goes to Deal Desk — no rep-level improvisation</div></div>
+</div>
+</div>
 
-  <div class="monbox" id="monbox">
-    <div class="mon-lbl">What the room told me about value</div>
-    <div class="mon-text" id="mon-text"></div>
-  </div>
+<div class="monbox" id="monbox">
+<div class="mon-lbl">What the room told me about value</div>
+<div class="mon-text" id="mon-text"></div>
+</div>
 
-  <div class="hbox"><div class="hlbl">What I heard on gaps</div><div class="htxt" id="ht"></div></div>
-  <div id="tarea"></div>
+<div class="hbox"><div class="hlbl">What I heard on gaps</div><div class="htxt" id="ht"></div></div>
+<div id="tarea"></div>
 
-  <div class="clbl" style="margin-bottom:.6rem">Where the gaps are showing up</div>
-  <div id="gbars"></div>
+<div class="clbl" style="margin-bottom:.6rem">Where the gaps are showing up</div>
+<div id="gbars"></div>
 
-  <div class="pcard">
-    <div class="clbl">Where I'd focus first</div>
-    <div class="pname" id="pname"></div>
-    <div id="caps"></div>
-  </div>
-  <button class="reset" onclick="restart()">← Start over</button>
+<div class="pcard">
+<div class="clbl">Where I'd focus first</div>
+<div class="pname" id="pname"></div>
+<div id="caps"></div>
+</div>
+<button class="reset" onclick="restart()">← Start over</button>
 </div>
 </div>
 
@@ -169,150 +167,168 @@ const L=['A','B','C','D'];
 // M = Monetization, G = Gap diagnostic, U = Urgency
 
 const QS=[
-  // ── TRACK 1: MONETIZATION (Q1-3) ──────────────────────────
-  {
-    track:'M',
+// ── TRACK 1: MONETIZATION (Q1-3) ──────────────────────────
+{
+track:'M',
+    t:"When you think about the value Mpower Agents and Autopilot deliver to a customer — what's the fairest way to describe it?",
     t:"Think about the value Mpower Agents and Autopilot deliver to the customer.  What's the fairest way to describe it?",
-    s:"Not how it's priced today. What the product is actually worth to them.",
-    o:[
-      {l:"Cost reduction — fewer agents, lower operational overhead",         sc:{M_cost:3}},
-      {l:"Revenue enablement — faster resolution, better customer retention", sc:{M_rev:3}},
-      {l:"Risk reduction — fewer escalations, compliance coverage",           sc:{M_risk:3}},
-      {l:"All three — it's genuinely multi-dimensional value",                sc:{M_multi:3}},
-    ]
-  },
-  {
-    track:'M',
-    t:"What part of that value do you think your current pricing model is failing to capture?",
-    s:"Be specific if you can. This is the gap I'm most interested in.",
-    o:[
-      {l:"High-volume customers pay the same as low-volume — no scale alignment",    sc:{M_gap_vol:3, A:2}},
-      {l:"Outcome value — containment rates, CSAT lift — isn't reflected in price",  sc:{M_gap_out:3, A:2}},
-      {l:"The AI story is strong but Sales can't translate it into a number",         sc:{M_gap_sales:3, SE:2}},
-      {l:"Honestly, we're not sure — we haven't measured it rigorously",             sc:{M_gap_unknown:3, I:2}},
-    ]
-  },
-  {
-    track:'M',
+s:"Not how it's priced today. What the product is actually worth to them.",
+o:[
+{l:"Cost reduction — fewer agents, lower operational overhead",         sc:{M_cost:3}},
+{l:"Revenue enablement — faster resolution, better customer retention", sc:{M_rev:3}},
+{l:"Risk reduction — fewer escalations, compliance coverage",           sc:{M_risk:3}},
+{l:"All three — it's genuinely multi-dimensional value",                sc:{M_multi:3}},
+]
+},
+{
+track:'M',
+t:"What part of that value do you think your current pricing model is failing to capture?",
+s:"Be specific if you can. This is the gap I'm most interested in.",
+o:[
+{l:"High-volume customers pay the same as low-volume — no scale alignment",    sc:{M_gap_vol:3, A:2}},
+{l:"Outcome value — containment rates, CSAT lift — isn't reflected in price",  sc:{M_gap_out:3, A:2}},
+{l:"The AI story is strong but Sales can't translate it into a number",         sc:{M_gap_sales:3, SE:2}},
+{l:"Honestly, we're not sure — we haven't measured it rigorously",             sc:{M_gap_unknown:3, I:2}},
+]
+},
+{
+track:'M',
+    t:"If you had to name the single biggest pricing risk NiCE faces in the next 12 months — what is it?",
     t:"Name the single biggest pricing risk NiCE faces in the next 12 months. What is it?",
-    s:"The answer that keeps you up at night.",
-    o:[
-      {l:"We under-price AI and leave significant ARR on the table",                        sc:{M_risk_under:3, A:2}},
-      {l:"We over-price AI, adoption stalls, and the platform story weakens",               sc:{M_risk_over:3, SE:1}},
-      {l:"Competitors define the pricing category and we're forced to respond",             sc:{M_risk_comp:3, A:2}},
-      {l:"Sales discounts aggressively to close deals and we never establish a floor",      sc:{M_risk_disc:3, G:2}},
-    ]
-  },
+s:"The answer that keeps you up at night.",
+o:[
+{l:"We under-price AI and leave significant ARR on the table",                        sc:{M_risk_under:3, A:2}},
+{l:"We over-price AI, adoption stalls, and the platform story weakens",               sc:{M_risk_over:3, SE:1}},
+{l:"Competitors define the pricing category and we're forced to respond",             sc:{M_risk_comp:3, A:2}},
+{l:"Sales discounts aggressively to close deals and we never establish a floor",      sc:{M_risk_disc:3, G:2}},
+]
+},
 
-  // ── TRACK 2: GAP DIAGNOSTIC (Q4-7) ────────────────────────
-  {
-    track:'G',
+// ── TRACK 2: GAP DIAGNOSTIC (Q4-7) ────────────────────────
+{
+track:'G',
+    t:"When Sales loses a deal and says it was on price — what actually happens next?",
     t:"Sales loses a deal and says it was 'price.'  What happens next?",
-    s:"Walk me through the process, or the lack of one.",
-    o:[
-      {l:"We adjust the discount and move on — no formal debrief",           sc:{G:2}},
-      {l:"We log it and review at a quarterly business review",               sc:{I:2}},
-      {l:"Honestly, it depends on the rep — no consistent process",          sc:{G:3}},
-      {l:"Win/loss feeds directly back into pricing strategy",               sc:{A:1}},
-    ]
-  },
-  {
-    track:'G',
+s:"Walk me through the process, or the lack of one.",
+o:[
+{l:"We adjust the discount and move on — no formal debrief",           sc:{G:2}},
+{l:"We log it and review at a quarterly business review",               sc:{I:2}},
+{l:"Honestly, it depends on the rep — no consistent process",          sc:{G:3}},
+{l:"Win/loss feeds directly back into pricing strategy",               sc:{A:1}},
+]
+},
+{
+track:'G',
+    t:"If I pulled your three best Sales reps in right now and asked them to explain CXone's AI pricing in one sentence — what would they say?",
     t:"If I pulled your three best Sales reps in right now and asked them to explain CXone's AI pricing in one sentence, what would they say?",
-    s:"Not what you'd want them to say. What they'd actually say.",
-    o:[
+s:"Not what you'd want them to say. What they'd actually say.",
+o:[
+      {l:"Three different things — no consistent answer across the team",    sc:{SE:3}},
       {l:"Three different things. There would be no consistent answer across the team",    sc:{SE:3}},
-      {l:"They'd describe features, not the value to the customer",          sc:{A:2}},
-      {l:"They'd lead with the discount they have room to offer",            sc:{G:2}},
-      {l:"A pretty consistent answer, with variation at the edges",          sc:{SE:1}},
-    ]
-  },
-  {
-    track:'G',
+{l:"They'd describe features, not the value to the customer",          sc:{A:2}},
+{l:"They'd lead with the discount they have room to offer",            sc:{G:2}},
+{l:"A pretty consistent answer, with variation at the edges",          sc:{SE:1}},
+]
+},
+{
+track:'G',
+    t:"When Finance sets a margin target for an AI product — how does that number get pressure-tested against what customers will actually pay?",
     t:"When Finance sets a margin target for an AI product or portfolio, how does that number get pressure-tested against what customers will actually pay?",
-    s:"Walk me through how that conversation happens in practice.",
-    o:[
-      {l:"It doesn't — Finance sets it and we work backward from there",     sc:{A:3}},
-      {l:"Sales pushes back if it feels off, but there's no data behind it", sc:{I:2}},
-      {l:"We do competitive benchmarking to sanity-check the number",        sc:{I:2}},
-      {l:"We have a willingness-to-pay research process",                    sc:{A:1}},
-    ]
-  },
-  {
-    track:'G',
-    t:"Who has the authority to say no to a deal because the pricing is wrong?",
+s:"Walk me through how that conversation happens in practice.",
+o:[
+{l:"It doesn't — Finance sets it and we work backward from there",     sc:{A:3}},
+{l:"Sales pushes back if it feels off, but there's no data behind it", sc:{I:2}},
+{l:"We do competitive benchmarking to sanity-check the number",        sc:{I:2}},
+{l:"We have a willingness-to-pay research process",                    sc:{A:1}},
+]
+},
+{
+track:'G',
+t:"Who has the authority to say no to a deal because the pricing is wrong?",
+    s:"Not in theory. In practice — who actually stops it?",
     s:"In practice who stops the process?,
-    o:[
+o:[
+      {l:"Nobody really — it escalates but usually goes through",            sc:{G:3}},
       {l:"Nobody.  It escalates but usually goes through",            sc:{G:3}},
-      {l:"Finance technically, but they rarely block a deal",                sc:{G:2}},
-      {l:"Deal Desk, but inconsistently applied across the team",            sc:{SE:2}},
-      {l:"A clear escalation matrix that's actually followed",               sc:{I:1}},
-    ]
-  },
+{l:"Finance technically, but they rarely block a deal",                sc:{G:2}},
+{l:"Deal Desk, but inconsistently applied across the team",            sc:{SE:2}},
+{l:"A clear escalation matrix that's actually followed",               sc:{I:1}},
+]
+},
 
-  // ── TRACK 3: URGENCY (Q8) ──────────────────────────────────
-  {
-    track:'U',
+// ── TRACK 3: URGENCY (Q8) ──────────────────────────────────
+{
+track:'U',
+    t:"Right now — today — if a Sales rep is closing a Mpower Agent deal, what do they put in the CPQ field for AI pricing?",
     t:"If a Sales rep is closing an Mpower Agent deal, what do they put in the CPQ field for AI pricing?",
-    s:"This is the most important question in the session.",
-    o:[
-      {l:"We have a defined SKU and consistent price they quote",             sc:{U_ok:1}},
+s:"This is the most important question in the session.",
+o:[
+{l:"We have a defined SKU and consistent price they quote",             sc:{U_ok:1}},
+      {l:"It varies — rep uses their best judgment on each deal",             sc:{U_chaos:3}},
+      {l:"It goes to Deal Desk every time — no standard answer exists",       sc:{U_desk:2}},
+      {l:"We don't have a clean answer to that yet",                          sc:{U_none:3}},
       {l:"It varies by rep.  They use their best judgment on each deal",             sc:{U_chaos:3}},
       {l:"It will go to Deal Desk for their recommendation, they iron out these kinks.",       sc:{U_desk:2}},
       {l:"It will go to Product Pricing for their recommendation, they iron out these kinks.",                          sc:{U_none:3}},
-    ]
-  },
+]
+},
 ];
 
 const PL={
-  A:{name:"Strategy & Architecture",
-     title:"The foundation needs resetting before anything else gets built.",
-     body:"The value metric is undefined or misaligned. Everything downstream — the sales motion, the governance, the analytics — is compensating for a gap that shouldn't exist.",
+A:{name:"Strategy & Architecture",
+title:"The foundation needs resetting before anything else gets built.",
+body:"The value metric is undefined or misaligned. Everything downstream — the sales motion, the governance, the analytics — is compensating for a gap that shouldn't exist.",
+     hearing:"The pricing model isn't keeping pace with the value delivered. Customers extracting dramatically more from AI products aren't showing up differently in revenue. That's structural misalignment — and it's the first thing to fix.",
      hearing:"The pricing model isn't keeping pace with the value delivered. Customers extracting dramatically more from AI products aren't showing up differently in revenue. That's structural misalignment and it's the first thing to fix.",
-     caps:["Value metric definition — establishing what you actually charge on and why","Pricing architecture — seat base + consumption layer + outcome premium","Competitive value gap quantification — where NiCE's differentiation holds at the table"]},
-  G:{name:"Governance & Operations",
-     title:"The strategy exists. The system around it isn't protecting it.",
+caps:["Value metric definition — establishing what you actually charge on and why","Pricing architecture — seat base + consumption layer + outcome premium","Competitive value gap quantification — where NiCE's differentiation holds at the table"]},
+G:{name:"Governance & Operations",
+title:"The strategy exists. The system around it isn't protecting it.",
+     body:"Every deal becomes a negotiation. Every exception becomes a precedent. The model may be right — but without governance it drifts at the speed of Sales pressure.",
+     hearing:"Pricing decisions are happening without a clear owner. Discounting is the de facto strategy. Authority is theoretical. The fix isn't a new model — it's the infrastructure that protects the one you have.",
      body:"Every deal becomes a negotiation. Every exception becomes a precedent. The model may be right but without governance it drifts at the speed of Sales pressure.",
      hearing:"Pricing decisions are happening without a clear owner. Discounting is the de facto strategy. Authority is theoretical. The fix is the infrastructure that protects the one you have.",
-     caps:["Pricing Council — decision rights, monthly cadence, SOX compliance","Discount band architecture — guardrails Sales can work within, not around","Approval matrix & escalation — who says no, when, and what happens next"]},
-  SE:{name:"Systems & Enablement",
-      title:"The architecture is sound. It's not reaching the field.",
+caps:["Pricing Council — decision rights, monthly cadence, SOX compliance","Discount band architecture — guardrails Sales can work within, not around","Approval matrix & escalation — who says no, when, and what happens next"]},
+SE:{name:"Systems & Enablement",
+title:"The architecture is sound. It's not reaching the field.",
+      body:"A pricing strategy that Sales can't execute isn't a strategy — it's a document. The gap is in the translation layer between the model and the moment a rep is in front of a customer.",
+      hearing:"The model exists but breaks down in execution. Reps are improvising. CPQ doesn't support the AI pricing motion. The customer experience of your pricing is inconsistent — and that has a clear fix.",
       body:"A pricing strategy that Sales can't execute is a nice document. The gap is in the translation layer between the model and the moment a rep is in front of a customer.",
       hearing:"The model exists but breaks down in execution. Reps are improvising. CPQ doesn't support the AI pricing motion. The customer experience of your pricing is inconsistent and that has a clear fix.",
-      caps:["CPQ configuration — Mpower Agent consumption tiers in a quotable format","Sales enablement — TCO calculators, battlecards, Pricing Office Hours","Launch process — pricing embedded in the stage-gate before release"]},
-  I:{name:"Intelligence & Analytics",
-     title:"Decisions are being made without a feedback loop.",
+caps:["CPQ configuration — Mpower Agent consumption tiers in a quotable format","Sales enablement — TCO calculators, battlecards, Pricing Office Hours","Launch process — pricing embedded in the stage-gate before release"]},
+I:{name:"Intelligence & Analytics",
+title:"Decisions are being made without a feedback loop.",
+     body:"You're flying without instruments. The model may be working — or drifting — and right now there's no systematic way to know which.",
      body:"You're flying without instruments. The model may be working or drifting but there's no systematic way to know which.",
-     hearing:"Pricing decisions are informed by instinct and competitive reaction more than data. Win/loss patterns aren't feeding back into strategy. Realization isn't being tracked. The opportunity is building the intelligence layer.",
-     caps:["Price realization tracking — list vs. pocket price by segment and AI tier","Win/loss analysis — distinguishing price losses from positioning losses from rep losses","Churn & retention analysis — identifying where pricing is creating risk"]}
+hearing:"Pricing decisions are informed by instinct and competitive reaction more than data. Win/loss patterns aren't feeding back into strategy. Realization isn't being tracked. The opportunity is building the intelligence layer.",
+caps:["Price realization tracking — list vs. pocket price by segment and AI tier","Win/loss analysis — distinguishing price losses from positioning losses from rep losses","Churn & retention analysis — identifying where pricing is creating risk"]}
 };
 
 const PL_NAMES={A:"Strategy & Architecture",G:"Governance & Operations",SE:"Systems & Enablement",I:"Intelligence & Analytics"};
 
 const TRACK_META={
-  M:{label:"Track 1 · Monetization",cls:"track-m"},
-  G:{label:"Track 2 · Organizational Gaps",cls:"track-g"},
-  U:{label:"Track 3 · Operational Urgency",cls:"track-u"},
+M:{label:"Track 1 · Monetization",cls:"track-m"},
+G:{label:"Track 2 · Organizational Gaps",cls:"track-g"},
+U:{label:"Track 3 · Operational Urgency",cls:"track-u"},
 };
 
 // Monetization insight text based on what they said
 function monInsight(scores){
-  const valueType = scores.M_multi ? "multi-dimensional"
-    : scores.M_cost ? "cost-reduction"
-    : scores.M_rev  ? "revenue-enabling"
-    : "risk-reduction";
+const valueType = scores.M_multi ? "multi-dimensional"
+: scores.M_cost ? "cost-reduction"
+: scores.M_rev  ? "revenue-enabling"
+: "risk-reduction";
 
-  const gap = scores.M_gap_vol    ? "high-volume customers aren't paying more than low-volume ones"
-    : scores.M_gap_out  ? "outcome value — containment rates, CSAT lift — isn't reflected anywhere in the contract"
-    : scores.M_gap_sales? "the value story is strong but Sales can't translate it into a defensible number"
-    : "the gap hasn't been rigorously measured yet — which is itself the gap";
+const gap = scores.M_gap_vol    ? "high-volume customers aren't paying more than low-volume ones"
+: scores.M_gap_out  ? "outcome value — containment rates, CSAT lift — isn't reflected anywhere in the contract"
+: scores.M_gap_sales? "the value story is strong but Sales can't translate it into a defensible number"
+: "the gap hasn't been rigorously measured yet — which is itself the gap";
 
-  const risk = scores.M_risk_under? "under-pricing AI and leaving ARR on the table"
-    : scores.M_risk_over ? "over-pricing and stalling adoption"
-    : scores.M_risk_comp ? "competitors defining the pricing category before NiCE does"
-    : "Sales discounting without a floor until the model is commoditized";
+const risk = scores.M_risk_under? "under-pricing AI and leaving ARR on the table"
+: scores.M_risk_over ? "over-pricing and stalling adoption"
+: scores.M_risk_comp ? "competitors defining the pricing category before NiCE does"
+: "Sales discounting without a floor until the model is commoditized";
 
-  return `The room described the product value as ${valueType}. The biggest uncaptured gap: ${gap}. The risk they named: ${risk}. That combination tells me exactly where to start.`;
+return `The room described the product value as ${valueType}. The biggest uncaptured gap: ${gap}. The risk they named: ${risk}. That combination tells me exactly where to start.`;
 }
 
 let cq=0, av=0;
@@ -322,135 +338,135 @@ let allScores={A:0,G:0,SE:0,I:0,M_cost:0,M_rev:0,M_risk:0,M_multi:0,M_gap_vol:0,
 function show(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('on'));document.getElementById(id).classList.add('on');}
 
 function renderQ(){
-  const q=QS[cq];
-  const pct=Math.round((cq/QS.length)*100);
-  document.getElementById('prog').style.width=pct+'%';
+const q=QS[cq];
+const pct=Math.round((cq/QS.length)*100);
+document.getElementById('prog').style.width=pct+'%';
 
-  // Track badge
-  const tm=TRACK_META[q.track];
-  document.getElementById('track-badge').innerHTML='<span class="track-label '+tm.cls+'">'+tm.label+'</span>';
+// Track badge
+const tm=TRACK_META[q.track];
+document.getElementById('track-badge').innerHTML='<span class="track-label '+tm.cls+'">'+tm.label+'</span>';
 
-  document.getElementById('qnum').textContent='Question '+(cq+1)+' of '+QS.length;
-  document.getElementById('qtext').textContent=q.t;
-  document.getElementById('qsub').textContent=q.s;
-  document.getElementById('bbk').style.visibility=cq===0?'hidden':'visible';
+document.getElementById('qnum').textContent='Question '+(cq+1)+' of '+QS.length;
+document.getElementById('qtext').textContent=q.t;
+document.getElementById('qsub').textContent=q.s;
+document.getElementById('bbk').style.visibility=cq===0?'hidden':'visible';
 
-  const allDone=votes[cq].every(v=>v!==null);
-  const nx=document.getElementById('bnx');
-  nx.textContent=cq===QS.length-1?'See results':'Next';
-  nx.classList.toggle('on',allDone);
+const allDone=votes[cq].every(v=>v!==null);
+const nx=document.getElementById('bnx');
+nx.textContent=cq===QS.length-1?'See results':'Next';
+nx.classList.toggle('on',allDone);
 
-  // Voter tabs
-  const tabs=document.getElementById('vtabs');
-  tabs.innerHTML='';
-  ROLES.forEach((r,i)=>{
-    const d=document.createElement('div');
-    const done=votes[cq][i]!==null;
-    d.className='vtab'+(i===av?' av':'')+(done?' done':'');
-    d.innerHTML=r+'<span class="dk"></span>';
-    d.onclick=()=>{av=i;renderQ();};
-    tabs.appendChild(d);
-  });
+// Voter tabs
+const tabs=document.getElementById('vtabs');
+tabs.innerHTML='';
+ROLES.forEach((r,i)=>{
+const d=document.createElement('div');
+const done=votes[cq][i]!==null;
+d.className='vtab'+(i===av?' av':'')+(done?' done':'');
+d.innerHTML=r+'<span class="dk"></span>';
+d.onclick=()=>{av=i;renderQ();};
+tabs.appendChild(d);
+});
 
-  // Split summary
-  const sp=document.getElementById('split');
-  const answered=votes[cq].map((v,i)=>v!==null?{r:ROLES[i],a:L[v]}:null).filter(Boolean);
-  if(!answered.length){sp.innerHTML='';}else{
-    const grp={};
-    answered.forEach(a=>{if(!grp[a.a])grp[a.a]=[];grp[a.a].push(a.r);});
-    const conflict=Object.keys(grp).length>1;
-    sp.innerHTML=Object.entries(grp).map(([a,rs])=>'<div class="sc'+(conflict?' diff':'')+'">'+a+': '+rs.join(', ')+'</div>').join('');
-  }
+// Split summary
+const sp=document.getElementById('split');
+const answered=votes[cq].map((v,i)=>v!==null?{r:ROLES[i],a:L[v]}:null).filter(Boolean);
+if(!answered.length){sp.innerHTML='';}else{
+const grp={};
+answered.forEach(a=>{if(!grp[a.a])grp[a.a]=[];grp[a.a].push(a.r);});
+const conflict=Object.keys(grp).length>1;
+sp.innerHTML=Object.entries(grp).map(([a,rs])=>'<div class="sc'+(conflict?' diff':'')+'">'+a+': '+rs.join(', ')+'</div>').join('');
+}
 
-  // Options
-  const oc=document.getElementById('opts');
-  oc.innerHTML='';
-  q.o.forEach((o,i)=>{
-    const d=document.createElement('div');
-    d.className='opt'+(votes[cq][av]===i?' sel':'');
-    d.innerHTML='<div class="ol">'+L[i]+'</div><div class="ot">'+o.l+'</div>';
-    d.onclick=()=>{
-      votes[cq][av]=i;
-      const nxt=votes[cq].findIndex(v=>v===null);
-      if(nxt!==-1)av=nxt;
-      renderQ();
-    };
-    oc.appendChild(d);
-  });
+// Options
+const oc=document.getElementById('opts');
+oc.innerHTML='';
+q.o.forEach((o,i)=>{
+const d=document.createElement('div');
+d.className='opt'+(votes[cq][av]===i?' sel':'');
+d.innerHTML='<div class="ol">'+L[i]+'</div><div class="ot">'+o.l+'</div>';
+d.onclick=()=>{
+votes[cq][av]=i;
+const nxt=votes[cq].findIndex(v=>v===null);
+if(nxt!==-1)av=nxt;
+renderQ();
+};
+oc.appendChild(d);
+});
 }
 
 function goBack(){if(cq===0)return;cq--;av=0;renderQ();}
 
 function goNext(){
-  if(!votes[cq].every(v=>v!==null))return;
-  if(cq===QS.length-1){buildResult();return;}
-  cq++;
-  av=votes[cq].findIndex(v=>v===null);
-  if(av===-1)av=0;
-  renderQ();
+if(!votes[cq].every(v=>v!==null))return;
+if(cq===QS.length-1){buildResult();return;}
+cq++;
+av=votes[cq].findIndex(v=>v===null);
+if(av===-1)av=0;
+renderQ();
 }
 
 function buildResult(){
-  show('s-result');
+show('s-result');
 
-  // Tally all scores
-  const tot={A:0,G:0,SE:0,I:0};
-  const mScores={M_cost:0,M_rev:0,M_risk:0,M_multi:0,M_gap_vol:0,M_gap_out:0,M_gap_sales:0,M_gap_unknown:0,M_risk_under:0,M_risk_over:0,M_risk_comp:0,M_risk_disc:0};
-  const uScores={U_ok:0,U_chaos:0,U_desk:0,U_none:0};
-  const vt=ROLES.map(()=>({A:0,G:0,SE:0,I:0}));
+// Tally all scores
+const tot={A:0,G:0,SE:0,I:0};
+const mScores={M_cost:0,M_rev:0,M_risk:0,M_multi:0,M_gap_vol:0,M_gap_out:0,M_gap_sales:0,M_gap_unknown:0,M_risk_under:0,M_risk_over:0,M_risk_comp:0,M_risk_disc:0};
+const uScores={U_ok:0,U_chaos:0,U_desk:0,U_none:0};
+const vt=ROLES.map(()=>({A:0,G:0,SE:0,I:0}));
 
-  votes.forEach((qv,qi)=>qv.forEach((v,vi)=>{
-    if(v===null)return;
-    const sc=QS[qi].o[v].sc;
-    for(const k in sc){
-      if(k in tot){tot[k]+=sc[k];vt[vi][k]+=sc[k];}
-      if(k in mScores) mScores[k]+=sc[k];
-      if(k in uScores) uScores[k]+=sc[k];
-    }
-  }));
+votes.forEach((qv,qi)=>qv.forEach((v,vi)=>{
+if(v===null)return;
+const sc=QS[qi].o[v].sc;
+for(const k in sc){
+if(k in tot){tot[k]+=sc[k];vt[vi][k]+=sc[k];}
+if(k in mScores) mScores[k]+=sc[k];
+if(k in uScores) uScores[k]+=sc[k];
+}
+}));
 
-  const sorted=Object.entries(tot).sort((a,b)=>b[1]-a[1]);
-  const topK=sorted[0][0];
-  const total=Math.max(1,Object.values(tot).reduce((a,b)=>a+b,0));
-  const p=PL[topK];
+const sorted=Object.entries(tot).sort((a,b)=>b[1]-a[1]);
+const topK=sorted[0][0];
+const total=Math.max(1,Object.values(tot).reduce((a,b)=>a+b,0));
+const p=PL[topK];
 
-  document.getElementById('rt').textContent=p.title;
-  document.getElementById('rb').textContent=p.body;
-  document.getElementById('ht').textContent=p.hearing;
-  document.getElementById('pname').textContent=p.name;
+document.getElementById('rt').textContent=p.title;
+document.getElementById('rb').textContent=p.body;
+document.getElementById('ht').textContent=p.hearing;
+document.getElementById('pname').textContent=p.name;
 
-  // Monetization insight
-  document.getElementById('mon-text').textContent=monInsight(mScores);
+// Monetization insight
+document.getElementById('mon-text').textContent=monInsight(mScores);
 
-  // Tension detection
-  const voterTop=vt.map((v,i)=>({role:ROLES[i],top:Object.entries(v).sort((a,b)=>b[1]-a[1])[0][0]}));
-  const topKeys=[...new Set(voterTop.map(v=>v.top))];
-  const ta=document.getElementById('tarea');
-  if(topKeys.length>1){
-    const grp={};
-    voterTop.forEach(v=>{if(!grp[v.top])grp[v.top]=[];grp[v.top].push(v.role);});
-    const txt=Object.entries(grp).map(([k,rs])=>rs.join(' & ')+' see a '+PL_NAMES[k]+' gap').join(' — while ')+'. That tension is itself a data point worth discussing.';
-    ta.innerHTML='<div class="tbox"><div class="tlbl">Tension detected</div><div class="ttxt">'+txt+'</div></div>';
-  }else{ta.innerHTML='';}
+// Tension detection
+const voterTop=vt.map((v,i)=>({role:ROLES[i],top:Object.entries(v).sort((a,b)=>b[1]-a[1])[0][0]}));
+const topKeys=[...new Set(voterTop.map(v=>v.top))];
+const ta=document.getElementById('tarea');
+if(topKeys.length>1){
+const grp={};
+voterTop.forEach(v=>{if(!grp[v.top])grp[v.top]=[];grp[v.top].push(v.role);});
+const txt=Object.entries(grp).map(([k,rs])=>rs.join(' & ')+' see a '+PL_NAMES[k]+' gap').join(' — while ')+'. That tension is itself a data point worth discussing.';
+ta.innerHTML='<div class="tbox"><div class="tlbl">Tension detected</div><div class="ttxt">'+txt+'</div></div>';
+}else{ta.innerHTML='';}
 
-  // Gap bars
-  const gb=document.getElementById('gbars');
-  gb.innerHTML='';
-  sorted.forEach(([k,v])=>{
-    const pct=Math.round((v/total)*100);
-    const isTop=k===topK;
-    const here=ROLES.filter((_,vi)=>Object.entries(vt[vi]).sort((a,b)=>b[1]-a[1])[0][0]===k);
-    gb.innerHTML+='<div class="brow-g"><div class="gr"><div class="gn'+(isTop?' top':'')+'">'+PL_NAMES[k]+'</div><div class="gt"><div class="gf'+(isTop?' top':'')+'" style="width:'+pct+'%"></div></div><div class="gp">'+pct+'%</div></div>'+(here.length?'<div class="vc">'+here.map(r=>'<div class="vch">'+r+'</div>').join('')+'</div>':'')+'</div>';
-  });
+// Gap bars
+const gb=document.getElementById('gbars');
+gb.innerHTML='';
+sorted.forEach(([k,v])=>{
+const pct=Math.round((v/total)*100);
+const isTop=k===topK;
+const here=ROLES.filter((_,vi)=>Object.entries(vt[vi]).sort((a,b)=>b[1]-a[1])[0][0]===k);
+gb.innerHTML+='<div class="brow-g"><div class="gr"><div class="gn'+(isTop?' top':'')+'">'+PL_NAMES[k]+'</div><div class="gt"><div class="gf'+(isTop?' top':'')+'" style="width:'+pct+'%"></div></div><div class="gp">'+pct+'%</div></div>'+(here.length?'<div class="vc">'+here.map(r=>'<div class="vch">'+r+'</div>').join('')+'</div>':'')+'</div>';
+});
 
-  // Capabilities
-  const cl=document.getElementById('caps');
-  cl.innerHTML=p.caps.map(c=>'<div class="ci"><div class="cd"></div><div class="ct">'+c+'</div></div>').join('');
+// Capabilities
+const cl=document.getElementById('caps');
+cl.innerHTML=p.caps.map(c=>'<div class="ci"><div class="cd"></div><div class="ct">'+c+'</div></div>').join('');
 }
 
 function restart(){
-  cq=0;av=0;
-  votes=QS.map(()=>ROLES.map(()=>null));
-  show('s-intro');
+cq=0;av=0;
+votes=QS.map(()=>ROLES.map(()=>null));
+show('s-intro');
 }
 </script>
