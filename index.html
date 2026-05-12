@@ -6,448 +6,822 @@
 <title>Pricing Discovery , William Beasley</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  :root {
-    --bg: #ffffff; --bg2: #f8f8f6;
-    --border: rgba(0,0,0,0.12); --border2: rgba(0,0,0,0.22);
-    --text: #1a1a18; --text2: #5a5a56; --text3: #9a9a94;
-    --teal: #007A8A; --navy: #0D1B3E; --navy-light: #EEF4FB;
-    --radius: 10px; --radius-sm: 6px; --radius-pill: 20px;
-  }
-  @media (prefers-color-scheme: dark) {
-    :root { --bg: #1c1c1a; --bg2: #252523; --border: rgba(255,255,255,0.12); --border2: rgba(255,255,255,0.22); --text: #e8e8e2; --text2: #a0a09a; --text3: #606058; --navy-light: #1a2540; }
-  }
-  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; background: var(--bg2); color: var(--text); min-height: 100vh; display: flex; align-items: flex-start; justify-content: center; padding: 2rem 1rem 4rem; }
-  .card { background: var(--bg); border: 0.5px solid var(--border); border-radius: 16px; padding: 2rem 2rem 2.5rem; width: 100%; max-width: 560px; }
-  .logo { font-size: 11px; font-weight: 500; color: var(--text3); letter-spacing: .08em; text-transform: uppercase; padding-bottom: .85rem; border-bottom: 0.5px solid var(--border); margin-bottom: 1.75rem; }
-  .logo b { color: var(--text); font-weight: 500; }
-  .screen { display: none; } .screen.on { display: block; }
-  .tag { font-size: 11px; font-weight: 500; color: var(--text3); letter-spacing: .07em; text-transform: uppercase; margin-bottom: .45rem; }
-  .h1 { font-size: 22px; font-weight: 500; color: var(--text); line-height: 1.35; margin-bottom: .35rem; }
-  .sub { font-size: 14px; color: var(--text2); line-height: 1.7; margin-bottom: 1.4rem; }
-  .eq { display: flex; gap: .35rem; flex-wrap: wrap; align-items: center; margin-bottom: 1.4rem; }
-  .pill { padding: .22rem .65rem; border: 0.5px solid var(--border2); border-radius: var(--radius-pill); font-size: 12px; color: var(--text2); }
-  .x { font-size: 11px; color: var(--text3); }
-  .prog-wrap { height: 2px; background: var(--border); border-radius: 2px; margin-bottom: .6rem; overflow: hidden; }
-  .prog { height: 100%; background: var(--navy); border-radius: 2px; transition: width .35s ease; }
-  .track-label { font-size: 10px; font-weight: 500; letter-spacing: .07em; text-transform: uppercase; margin-bottom: 1.2rem; padding: .25rem .65rem; border-radius: var(--radius-pill); display: inline-block; }
-  .track-m { background: #FEF3C7; color: #92400E; border: 0.5px solid #D97706; }
-  .track-g { background: #E0F2FE; color: #0C4A6E; border: 0.5px solid #0EA5E9; }
-  .track-u { background: #FEE2E2; color: #7F1D1D; border: 0.5px solid #DC2626; }
-  .qnum { font-size: 11px; font-weight: 500; color: var(--text3); letter-spacing: .06em; text-transform: uppercase; margin-bottom: .4rem; }
-  .qtext { font-size: 17px; font-weight: 500; color: var(--text); line-height: 1.4; margin-bottom: .28rem; }
-  .qsub { font-size: 13px; color: var(--text2); line-height: 1.6; margin-bottom: 1.1rem; }
-  .vtabs { display: flex; gap: .3rem; flex-wrap: wrap; margin-bottom: .75rem; }
-  .vtab { padding: .3rem .75rem; border-radius: var(--radius-pill); border: 0.5px solid var(--border2); font-size: 12px; color: var(--text2); cursor: pointer; background: var(--bg); transition: all .15s; position: relative; user-select: none; }
-  .vtab:hover { background: var(--bg2); }
-  .vtab.av { background: var(--navy); color: #fff; border-color: var(--navy); }
-  .vtab .dk { width: 6px; height: 6px; border-radius: 50%; background: var(--teal); position: absolute; top: 3px; right: 3px; display: none; }
-  .vtab.done .dk { display: block; }
-  .vtab.av.done .dk { background: #7DD3FC; }
-  .split-row { display: flex; gap: .3rem; flex-wrap: wrap; min-height: 20px; margin-bottom: .65rem; }
-  .sc { padding: .15rem .5rem; border-radius: var(--radius-pill); font-size: 11px; border: 0.5px solid var(--border); color: var(--text2); background: var(--bg2); }
-  .sc.diff { background: #FEF3C7; border-color: #D97706; color: #92400E; }
-  .opts { display: flex; flex-direction: column; gap: .4rem; margin-bottom: 1.35rem; }
-  .opt { display: flex; align-items: flex-start; gap: .65rem; padding: .68rem .85rem; border: 0.5px solid var(--border2); border-radius: var(--radius); cursor: pointer; background: var(--bg); transition: all .12s; user-select: none; }
-  .opt:hover { background: var(--bg2); }
-  .opt.sel { border-color: var(--navy); background: var(--navy-light); }
-  .ol { width: 20px; height: 20px; min-width: 20px; border-radius: 50%; border: 0.5px solid var(--border2); display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 500; color: var(--text3); margin-top: 1px; flex-shrink: 0; transition: all .12s; }
-  .opt.sel .ol { background: var(--navy); border-color: var(--navy); color: #fff; }
-  .ot { font-size: 13px; color: var(--text); line-height: 1.5; }
-  .brow { display: flex; justify-content: space-between; align-items: center; }
-  button { padding: .52rem 1.15rem; border-radius: var(--radius-sm); font-size: 13px; font-weight: 500; cursor: pointer; transition: all .12s; font-family: inherit; }
-  .btn-p { background: var(--navy); color: #fff; border: none; opacity: .35; }
-  .btn-p.on { opacity: 1; }
-  .btn-p.on:hover { opacity: .85; }
-  .btn-g { background: transparent; color: var(--text2); border: 0.5px solid var(--border2); }
-  .btn-g:hover { background: var(--bg2); }
-  .rh { font-size: 11px; font-weight: 500; color: var(--text3); letter-spacing: .07em; text-transform: uppercase; margin-bottom: .4rem; margin-top: 1.5rem; }
-  .rt { font-size: 20px; font-weight: 500; color: var(--text); line-height: 1.35; margin-bottom: .3rem; }
-  .rb { font-size: 14px; color: var(--text2); line-height: 1.7; margin-bottom: 1rem; }
-  .firebox { background: #FEF2F2; border: 1.5px solid #DC2626; border-radius: var(--radius); padding: .9rem 1rem; margin-bottom: 1rem; }
-  .fire-lbl { font-size: 10px; font-weight: 500; color: #DC2626; text-transform: uppercase; letter-spacing: .07em; margin-bottom: .25rem; }
-  .fire-title { font-size: 14px; font-weight: 500; color: #7F1D1D; margin-bottom: .4rem; }
-  .fire-items { display: flex; flex-direction: column; gap: .3rem; }
-  .fi { display: flex; gap: .5rem; align-items: flex-start; }
-  .fi-dot { width: 5px; height: 5px; min-width: 5px; border-radius: 50%; background: #DC2626; margin-top: 5px; flex-shrink: 0; }
-  .fi-text { font-size: 12.5px; color: #7F1D1D; line-height: 1.5; }
-  .monbox { background: #FFFBEB; border: 0.5px solid #D97706; border-radius: var(--radius); padding: .9rem 1rem; margin-bottom: 1rem; }
-  .mon-lbl { font-size: 10px; font-weight: 500; color: #92400E; text-transform: uppercase; letter-spacing: .07em; margin-bottom: .25rem; }
-  .mon-text { font-size: 13px; color: #78350F; line-height: 1.6; font-style: italic; }
-  .hbox { border-left: 2px solid var(--teal); padding: .7rem .9rem; background: var(--bg2); margin-bottom: .85rem; }
-  .hlbl { font-size: 10px; font-weight: 500; color: var(--teal); text-transform: uppercase; letter-spacing: .06em; margin-bottom: .2rem; }
-  .htxt { font-size: 13px; color: var(--text); line-height: 1.65; font-style: italic; }
-  .tbox { background: #FFFBEB; border: 0.5px solid #D97706; border-radius: var(--radius-sm); padding: .8rem .9rem; margin-bottom: .85rem; }
-  .tlbl { font-size: 10px; font-weight: 500; color: #92400E; text-transform: uppercase; letter-spacing: .06em; margin-bottom: .25rem; }
-  .ttxt { font-size: 13px; color: #78350F; line-height: 1.6; }
-  .clbl { font-size: 10px; font-weight: 500; color: var(--text3); text-transform: uppercase; letter-spacing: .06em; margin-bottom: .5rem; }
-  .brow-g { margin-bottom: .7rem; }
-  .gr { display: flex; align-items: center; gap: .65rem; margin-bottom: .3rem; }
-  .gn { font-size: 12px; color: var(--text2); width: 175px; min-width: 175px; }
-  .gn.top { color: var(--text); font-weight: 500; }
-  .gt { flex: 1; height: 5px; background: var(--border); border-radius: 3px; overflow: hidden; }
-  .gf { height: 100%; border-radius: 3px; background: var(--border2); transition: width 1s ease; }
-  .gf.top { background: var(--teal); }
-  .gp { font-size: 11px; color: var(--text3); min-width: 28px; text-align: right; }
-  .vc { display: flex; gap: .25rem; flex-wrap: wrap; margin-top: .2rem; }
-  .vch { padding: .1rem .45rem; border-radius: var(--radius-pill); font-size: 10px; border: 0.5px solid var(--border); color: var(--text3); }
-  .pcard { border: 1.5px solid var(--teal); border-radius: var(--radius); padding: 1.1rem; margin-top: .75rem; }
-  .pname { font-size: 15px; font-weight: 500; color: var(--text); margin-bottom: .65rem; }
-  .ci { display: flex; gap: .45rem; margin-bottom: .38rem; align-items: flex-start; }
-  .cd { width: 5px; height: 5px; min-width: 5px; border-radius: 50%; background: var(--teal); margin-top: 5px; flex-shrink: 0; }
-  .ct { font-size: 13px; color: var(--text); line-height: 1.55; }
-  .reset { font-size: 12px; color: var(--text3); cursor: pointer; text-decoration: underline; margin-top: 1.5rem; display: inline-block; background: none; border: none; padding: 0; font-family: inherit; }
-  .reset:hover { color: var(--text2); }
-  @media (max-width: 480px) {
-    body { padding: 1rem .75rem 3rem; }
-    .card { padding: 1.5rem 1.25rem 2rem; }
-    .h1 { font-size: 20px; } .qtext { font-size: 15px; } .gn { width: 140px; min-width: 140px; }
-  }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg:#ffffff; --bg2:#f8f8f6;
+  --border:rgba(0,0,0,0.12); --border2:rgba(0,0,0,0.22);
+  --text:#1a1a18; --text2:#5a5a56; --text3:#9a9a94;
+  --teal:#007A8A; --navy:#0D1B3E; --navy-light:#EEF4FB;
+  --radius:10px; --radius-sm:6px; --radius-pill:20px;
+}
+@media (prefers-color-scheme:dark) {
+  :root { --bg:#1c1c1a; --bg2:#252523; --border:rgba(255,255,255,0.12); --border2:rgba(255,255,255,0.22); --text:#e8e8e2; --text2:#a0a09a; --text3:#606058; --navy-light:#1a2540; }
+}
+body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif; background:var(--bg2); color:var(--text); min-height:100vh; display:flex; align-items:flex-start; justify-content:center; padding:2rem 1rem 4rem; }
+.card { background:var(--bg); border:0.5px solid var(--border); border-radius:16px; padding:2rem 2rem 2.5rem; width:100%; max-width:580px; }
+.logo { font-size:11px; font-weight:500; color:var(--text3); letter-spacing:.08em; text-transform:uppercase; padding-bottom:.85rem; border-bottom:0.5px solid var(--border); margin-bottom:1.75rem; }
+.logo b { color:var(--text); font-weight:500; }
+.screen { display:none; } .screen.on { display:block; }
+.tag { font-size:11px; font-weight:500; color:var(--text3); letter-spacing:.07em; text-transform:uppercase; margin-bottom:.45rem; }
+.h1 { font-size:22px; font-weight:500; color:var(--text); line-height:1.35; margin-bottom:.35rem; }
+.sub { font-size:14px; color:var(--text2); line-height:1.7; margin-bottom:1.4rem; }
+.eq { display:flex; gap:.35rem; flex-wrap:wrap; align-items:center; margin-bottom:1.4rem; }
+.pill { padding:.22rem .65rem; border:0.5px solid var(--border2); border-radius:var(--radius-pill); font-size:12px; color:var(--text2); }
+.x { font-size:11px; color:var(--text3); }
+.prog-wrap { height:2px; background:var(--border); border-radius:2px; margin-bottom:.6rem; overflow:hidden; }
+.prog { height:100%; background:var(--navy); border-radius:2px; transition:width .35s ease; }
+.track-label { font-size:10px; font-weight:500; letter-spacing:.07em; text-transform:uppercase; margin-bottom:1.2rem; padding:.25rem .65rem; border-radius:var(--radius-pill); display:inline-block; }
+.track-m { background:#FEF3C7; color:#92400E; border:0.5px solid #D97706; }
+.track-g { background:#E0F2FE; color:#0C4A6E; border:0.5px solid #0EA5E9; }
+.track-u { background:#FEE2E2; color:#7F1D1D; border:0.5px solid #DC2626; }
+.qnum { font-size:11px; font-weight:500; color:var(--text3); letter-spacing:.06em; text-transform:uppercase; margin-bottom:.4rem; }
+.qtext { font-size:17px; font-weight:500; color:var(--text); line-height:1.4; margin-bottom:.28rem; }
+.qsub { font-size:13px; color:var(--text2); line-height:1.6; margin-bottom:1.1rem; }
+.vtabs { display:flex; gap:.3rem; flex-wrap:wrap; margin-bottom:.75rem; }
+.vtab { padding:.3rem .75rem; border-radius:var(--radius-pill); border:0.5px solid var(--border2); font-size:12px; color:var(--text2); cursor:pointer; background:var(--bg); transition:all .15s; position:relative; user-select:none; }
+.vtab:hover { background:var(--bg2); }
+.vtab.av { background:var(--navy); color:#fff; border-color:var(--navy); }
+.vtab .dk { width:6px; height:6px; border-radius:50%; background:var(--teal); position:absolute; top:3px; right:3px; display:none; }
+.vtab.done .dk { display:block; }
+.vtab.av.done .dk { background:#7DD3FC; }
+.vtab.na-voter { border-color:var(--text3); opacity:.55; }
+.vtab.av.na-voter { background:var(--text3); border-color:var(--text3); opacity:1; }
+.split-row { display:flex; gap:.3rem; flex-wrap:wrap; min-height:20px; margin-bottom:.65rem; }
+.sc { padding:.15rem .5rem; border-radius:var(--radius-pill); font-size:11px; border:0.5px solid var(--border); color:var(--text2); background:var(--bg2); }
+.sc.diff { background:#FEF3C7; border-color:#D97706; color:#92400E; }
+.sc.na { color:var(--text3); border-color:var(--border); font-style:italic; }
+.opts { display:flex; flex-direction:column; gap:.4rem; margin-bottom:.75rem; }
+.opt { display:flex; align-items:flex-start; gap:.65rem; padding:.68rem .85rem; border:0.5px solid var(--border2); border-radius:var(--radius); cursor:pointer; background:var(--bg); transition:all .12s; user-select:none; }
+.opt:hover { background:var(--bg2); }
+.opt.sel { border-color:var(--navy); background:var(--navy-light); }
+.ol { width:20px; height:20px; min-width:20px; border-radius:50%; border:0.5px solid var(--border2); display:flex; align-items:center; justify-content:center; font-size:10px; font-weight:500; color:var(--text3); margin-top:1px; flex-shrink:0; transition:all .12s; }
+.opt.sel .ol { background:var(--navy); border-color:var(--navy); color:#fff; }
+.ot { font-size:13px; color:var(--text); line-height:1.5; }
+.na-voter-row { margin-bottom:1.1rem; }
+.btn-na-voter { font-size:11px; font-weight:500; padding:.28rem .75rem; border-radius:var(--radius-pill); border:0.5px solid var(--border2); background:var(--bg); color:var(--text3); cursor:pointer; transition:all .12s; font-family:inherit; }
+.btn-na-voter:hover { background:var(--bg2); color:var(--text2); }
+.btn-na-voter.active { background:var(--text3); color:#fff; border-color:var(--text3); }
+.brow { display:flex; justify-content:space-between; align-items:center; gap:.5rem; }
+.brow-left { display:flex; align-items:center; gap:.5rem; }
+button { padding:.52rem 1.15rem; border-radius:var(--radius-sm); font-size:13px; font-weight:500; cursor:pointer; transition:all .12s; font-family:inherit; }
+.btn-p { background:var(--navy); color:#fff; border:none; opacity:.35; }
+.btn-p.on { opacity:1; }
+.btn-p.on:hover { opacity:.85; }
+.btn-g { background:transparent; color:var(--text2); border:0.5px solid var(--border2); }
+.btn-g:hover { background:var(--bg2); }
+.btn-skip { font-size:11px; padding:.35rem .85rem; border-radius:var(--radius-pill); border:0.5px solid var(--border2); background:var(--bg); color:var(--text3); cursor:pointer; transition:all .12s; font-family:inherit; }
+.btn-skip:hover { background:var(--bg2); color:var(--text2); }
+.skipped-banner { background:var(--bg2); border:0.5px solid var(--border); border-radius:var(--radius-sm); padding:.55rem .85rem; margin-bottom:.75rem; display:flex; align-items:center; justify-content:space-between; }
+.skipped-text { font-size:12px; color:var(--text3); font-style:italic; }
+.btn-unskip { font-size:11px; padding:.2rem .6rem; border-radius:var(--radius-pill); border:0.5px solid var(--border2); background:var(--bg); color:var(--text2); cursor:pointer; font-family:inherit; }
+.btn-unskip:hover { background:var(--bg2); }
+
+/* ── RESULT SCREEN ── */
+.res-section { margin-bottom:1.25rem; }
+.res-lbl { font-size:10px; font-weight:500; color:var(--text3); letter-spacing:.07em; text-transform:uppercase; margin-bottom:.4rem; }
+.res-title { font-size:19px; font-weight:500; color:var(--text); line-height:1.35; margin-bottom:.3rem; }
+.res-body { font-size:13.5px; color:var(--text2); line-height:1.7; margin-bottom:.85rem; }
+
+/* pivot statement */
+.pivot-box { background:var(--bg2); border-radius:var(--radius); padding:1rem 1.1rem; margin-bottom:1.25rem; }
+.pivot-text { font-size:14px; color:var(--text); line-height:1.7; font-style:italic; }
+
+/* monetization section */
+.mon-section { border:0.5px solid #D97706; border-radius:var(--radius); overflow:hidden; margin-bottom:1.25rem; }
+.mon-header { background:#FFFBEB; padding:.75rem 1rem; display:flex; align-items:center; justify-content:space-between; cursor:pointer; }
+.mon-lbl { font-size:10px; font-weight:500; color:#92400E; text-transform:uppercase; letter-spacing:.07em; }
+.mon-summary { font-size:13px; color:#78350F; line-height:1.55; padding:.75rem 1rem; }
+.mon-expand { border-top:0.5px solid #D97706; padding:1rem; background:#FFFBEB; }
+.mon-expand-hidden { display:none; }
+.btn-expand { font-size:11px; padding:.25rem .7rem; border-radius:var(--radius-pill); border:0.5px solid #D97706; background:transparent; color:#92400E; cursor:pointer; font-family:inherit; display:flex; align-items:center; gap:4px; }
+.btn-expand:hover { background:#FEF3C7; }
+
+/* value metric framework inside result */
+.vmf-intro-r { font-size:12px; color:var(--text2); line-height:1.55; margin-bottom:.85rem; }
+.vmf-toggles { display:flex; gap:6px; flex-wrap:wrap; margin-bottom:1rem; }
+.vmf-toggle { font-size:11px; padding:4px 12px; border-radius:20px; border:0.5px solid var(--border2); background:var(--bg); color:var(--text2); cursor:pointer; transition:all .15s; user-select:none; }
+.vmf-toggle.on { background:var(--navy); color:#fff; border-color:var(--navy); }
+.vmf-grid-r { display:grid; grid-template-columns:130px repeat(4,minmax(0,1fr)); gap:0; border:0.5px solid var(--border); border-radius:var(--radius-sm); overflow:hidden; margin-bottom:1rem; }
+.vmf-cell { padding:8px 10px; border-bottom:0.5px solid var(--border); border-right:0.5px solid var(--border); font-size:11px; color:var(--text2); line-height:1.35; }
+.vmf-cell:nth-child(5n) { border-right:none; }
+.vmf-cell.hdr { font-size:10px; font-weight:500; color:var(--text); background:var(--bg2); text-transform:uppercase; letter-spacing:.04em; }
+.vmf-cell.hdr.win { background:#EEF4FB; color:#185FA5; }
+.vmf-cell.dim { font-weight:500; color:var(--text); background:var(--bg2); font-size:11px; }
+.vmf-cell.last { border-bottom:none; }
+.sb { height:3px; border-radius:2px; background:var(--border); margin-top:4px; overflow:hidden; }
+.sf { height:100%; border-radius:2px; transition:width .4s; }
+.win-tag { display:inline-block; font-size:9px; font-weight:500; padding:1px 6px; border-radius:20px; background:#EAF3DE; color:#3B6D11; margin-top:3px; }
+.vmf-verdict-r { background:var(--bg2); border-radius:var(--radius-sm); padding:.75rem .9rem; font-size:12px; color:var(--text); line-height:1.6; margin-bottom:.5rem; }
+.cpq-rec { border:0.5px solid var(--teal); border-radius:var(--radius); padding:.85rem 1rem; margin-top:.85rem; }
+.cpq-lbl { font-size:10px; font-weight:500; color:var(--teal); text-transform:uppercase; letter-spacing:.06em; margin-bottom:.4rem; }
+.cpq-title { font-size:14px; font-weight:500; color:var(--text); margin-bottom:.5rem; }
+.cpq-items { display:flex; flex-direction:column; gap:.3rem; }
+.cpq-item { display:flex; gap:.5rem; align-items:flex-start; }
+.cpq-dot { width:5px; height:5px; min-width:5px; border-radius:50%; background:var(--teal); margin-top:4px; flex-shrink:0; }
+.cpq-text { font-size:12px; color:var(--text2); line-height:1.5; }
+
+/* gap section */
+.gap-section { margin-bottom:1.25rem; }
+.hbox { border-left:2px solid var(--teal); padding:.7rem .9rem; background:var(--bg2); margin-bottom:.75rem; }
+.hlbl { font-size:10px; font-weight:500; color:var(--teal); text-transform:uppercase; letter-spacing:.06em; margin-bottom:.2rem; }
+.htxt { font-size:13px; color:var(--text); line-height:1.65; font-style:italic; }
+.tbox { background:#FFFBEB; border:0.5px solid #D97706; border-radius:var(--radius-sm); padding:.8rem .9rem; margin-bottom:.75rem; }
+.tlbl { font-size:10px; font-weight:500; color:#92400E; text-transform:uppercase; letter-spacing:.06em; margin-bottom:.25rem; }
+.ttxt { font-size:13px; color:#78350F; line-height:1.6; }
+.clbl { font-size:10px; font-weight:500; color:var(--text3); text-transform:uppercase; letter-spacing:.06em; margin-bottom:.5rem; }
+.brow-g { margin-bottom:.65rem; }
+.gr { display:flex; align-items:center; gap:.65rem; margin-bottom:.28rem; }
+.gn { font-size:12px; color:var(--text2); width:170px; min-width:170px; }
+.gn.top { color:var(--text); font-weight:500; }
+.gt { flex:1; height:5px; background:var(--border); border-radius:3px; overflow:hidden; }
+.gf { height:100%; border-radius:3px; background:var(--border2); transition:width 1s; }
+.gf.top { background:var(--teal); }
+.gp { font-size:11px; color:var(--text3); min-width:28px; text-align:right; }
+.vc { display:flex; gap:.25rem; flex-wrap:wrap; margin-top:.2rem; }
+.vch { padding:.1rem .45rem; border-radius:var(--radius-pill); font-size:10px; border:0.5px solid var(--border); color:var(--text3); }
+
+/* pillar cards */
+.pcard { border:1.5px solid var(--teal); border-radius:var(--radius); padding:1.1rem; margin-top:.75rem; }
+.pcard.second { border-color:var(--border2); margin-top:.55rem; }
+.pname { font-size:15px; font-weight:500; color:var(--text); margin-bottom:.35rem; }
+.pillar-badge { font-size:10px; font-weight:500; color:var(--teal); text-transform:uppercase; letter-spacing:.06em; display:block; margin-bottom:.35rem; }
+.pillar-badge.second { color:var(--text3); }
+.ci { display:flex; gap:.45rem; margin-bottom:.38rem; align-items:flex-start; }
+.cd { width:5px; height:5px; min-width:5px; border-radius:50%; background:var(--teal); margin-top:5px; flex-shrink:0; }
+.ct { font-size:13px; color:var(--text); line-height:1.55; }
+.override-bar { display:flex; gap:.3rem; flex-wrap:wrap; margin:.85rem 0 .1rem; padding-top:.75rem; border-top:0.5px solid var(--border); }
+.override-lbl { font-size:10px; font-weight:500; color:var(--text3); text-transform:uppercase; letter-spacing:.06em; width:100%; margin-bottom:.25rem; }
+.btn-override { font-size:11px; padding:.25rem .65rem; border-radius:var(--radius-pill); border:0.5px solid var(--border2); background:var(--bg); color:var(--text2); cursor:pointer; font-family:inherit; transition:all .12s; }
+.btn-override:hover { background:var(--bg2); }
+.btn-override.sel1 { background:var(--navy); color:#fff; border-color:var(--navy); }
+.btn-override.sel2 { background:var(--bg2); color:var(--text); border-color:var(--border2); font-weight:600; }
+
+/* fire box */
+.firebox { background:#FEF2F2; border:1.5px solid #DC2626; border-radius:var(--radius); padding:.9rem 1rem; margin-top:1.25rem; }
+.fire-lbl { font-size:10px; font-weight:500; color:#DC2626; text-transform:uppercase; letter-spacing:.07em; margin-bottom:.25rem; }
+.fire-title { font-size:14px; font-weight:500; color:#7F1D1D; margin-bottom:.4rem; }
+.fire-items { display:flex; flex-direction:column; gap:.3rem; }
+.fi { display:flex; gap:.5rem; align-items:flex-start; }
+.fi-dot { width:5px; height:5px; min-width:5px; border-radius:50%; background:#DC2626; margin-top:5px; flex-shrink:0; }
+.fi-text { font-size:12.5px; color:#7F1D1D; line-height:1.5; }
+
+.reset { font-size:12px; color:var(--text3); cursor:pointer; text-decoration:underline; margin-top:1.5rem; display:inline-block; background:none; border:none; padding:0; font-family:inherit; }
+.reset:hover { color:var(--text2); }
+
+/* bundle expand button */
+.btn-bundle-expand { margin-top:.85rem; width:100%; display:flex; align-items:center; justify-content:center; gap:6px; font-size:12px; font-weight:500; padding:.5rem 1rem; border-radius:var(--radius-sm); border:0.5px solid rgba(220,38,38,0.4); background:rgba(220,38,38,0.08); color:#DC2626; cursor:pointer; font-family:inherit; transition:all .15s; }
+.btn-bundle-expand:hover { background:rgba(220,38,38,0.14); }
+.bundle-hidden { display:none; }
+.bundle-illustration { margin-top:1rem; padding-top:1rem; border-top:0.5px solid rgba(220,38,38,0.25); }
+
+/* aib stack */
+.aib-stack { display:flex; flex-direction:column; gap:0; border-radius:10px; overflow:hidden; border:0.5px solid rgba(255,255,255,0.15); margin-bottom:1rem; }
+.aib-layer { padding:.85rem 1rem; position:relative; }
+.aib-layer-tag { font-size:9px; font-weight:500; letter-spacing:.07em; text-transform:uppercase; margin-bottom:.2rem; }
+.aib-layer-name { font-size:14px; font-weight:500; margin-bottom:.15rem; }
+.aib-layer-desc { font-size:11px; line-height:1.45; }
+.aib-badge { position:absolute; top:.85rem; right:1rem; font-size:9px; font-weight:500; padding:2px 8px; border-radius:20px; background:rgba(255,255,255,0.12); color:rgba(255,255,255,0.7); }
+.aib-badge-now { background:#F59E0B; color:#451A03; }
+.aib-l1 { background:#0D1B3E; border-bottom:0.5px solid rgba(255,255,255,0.1); }
+.aib-l1 .aib-layer-tag { color:#7DD3FC; }
+.aib-l1 .aib-layer-name { color:#fff; }
+.aib-l1 .aib-layer-desc { color:#94A3B8; }
+.aib-l2 { background:#007A8A; border-bottom:0.5px solid rgba(255,255,255,0.15); }
+.aib-l2 .aib-layer-tag { color:#A5F3FC; }
+.aib-l2 .aib-layer-name { color:#fff; }
+.aib-l2 .aib-layer-desc { color:#E0F7FA; }
+.aib-l3 { background:#1E293B; }
+.aib-l3 .aib-layer-tag { color:#FCD34D; }
+.aib-l3 .aib-layer-name { color:#F8FAFC; }
+.aib-l3 .aib-layer-desc { color:#94A3B8; }
+.aib-caps-row { display:flex; gap:6px; flex-wrap:wrap; margin-top:.65rem; }
+.aib-cap { background:rgba(255,255,255,0.12); border-radius:6px; padding:5px 8px; }
+.aib-cap-name { font-size:11px; font-weight:500; color:#fff; }
+.aib-cap-sub { font-size:10px; color:#BAE6FD; }
+.aib-detail-grid { display:grid; grid-template-columns:1fr 1fr; gap:6px; margin-top:.65rem; }
+.aib-detail-card { background:rgba(255,255,255,0.1); border-radius:6px; padding:6px 8px; }
+.aib-dc-lbl { font-size:9px; font-weight:500; color:#A5F3FC; text-transform:uppercase; letter-spacing:.05em; margin-bottom:2px; }
+.aib-dc-val { font-size:11px; font-weight:500; color:#fff; line-height:1.35; }
+
+/* aib table */
+.aib-section-lbl { font-size:10px; font-weight:500; color:rgba(220,38,38,0.8); text-transform:uppercase; letter-spacing:.06em; margin-bottom:.5rem; margin-top:.85rem; }
+.aib-table { width:100%; border-collapse:collapse; border:0.5px solid rgba(220,38,38,0.2); border-radius:8px; overflow:hidden; font-size:11px; }
+.aib-table th { background:rgba(220,38,38,0.08); color:#7F1D1D; font-size:10px; font-weight:500; text-transform:uppercase; letter-spacing:.04em; padding:6px 8px; text-align:left; border-bottom:0.5px solid rgba(220,38,38,0.2); }
+.aib-table td { color:#7F1D1D; padding:7px 8px; border-bottom:0.5px solid rgba(220,38,38,0.12); vertical-align:middle; }
+.aib-table tr:last-child td { border-bottom:none; }
+.aib-row-hero td { background:rgba(220,38,38,0.06); font-weight:500; }
+.tp { display:inline-block; font-size:9px; font-weight:500; padding:2px 7px; border-radius:20px; }
+.tp-bronze { background:#FEF3C7; color:#92400E; }
+.tp-silver { background:#DBEAFE; color:#1E3A8A; }
+.tp-gold   { background:#DCFCE7; color:#14532D; }
+.tp-ent    { background:#F3E8FF; color:#4C1D95; }
+
+/* aib flow */
+.aib-flow { display:flex; align-items:center; gap:0; margin-bottom:.5rem; }
+.aib-flow-node { flex:1; background:rgba(220,38,38,0.06); border:0.5px solid rgba(220,38,38,0.2); border-radius:6px; padding:6px 6px; text-align:center; }
+.aib-fn-label { font-size:10px; font-weight:500; color:#7F1D1D; line-height:1.3; }
+.aib-fn-sub { font-size:9px; color:#B91C1C; margin-top:1px; }
+.aib-fn-active { background:rgba(0,122,138,0.12); border-color:rgba(0,122,138,0.4); }
+.aib-fn-active .aib-fn-label { color:#007A8A; }
+.aib-fn-active .aib-fn-sub { color:#007A8A; }
+.aib-fn-warn { background:rgba(220,38,38,0.1); border-color:#DC2626; }
+.aib-flow-arrow { font-size:12px; color:rgba(220,38,38,0.4); padding:0 3px; flex-shrink:0; }
+
+/* aib timeline */
+.aib-timeline { display:flex; gap:0; border-radius:8px; overflow:hidden; border:0.5px solid rgba(220,38,38,0.2); }
+.aib-tl { flex:1; padding:6px 4px; text-align:center; border-right:0.5px solid rgba(220,38,38,0.15); }
+.aib-tl:last-child { border-right:none; }
+.aib-tl-time { font-size:9px; font-weight:500; color:rgba(127,29,29,0.6); margin-bottom:2px; }
+.aib-tl-label { font-size:10px; font-weight:500; color:#7F1D1D; line-height:1.3; }
+.aib-tl-now { background:rgba(220,38,38,0.12); }
+.aib-tl-now .aib-tl-time { color:#DC2626; }
+.aib-tl-now .aib-tl-label { color:#DC2626; }
+@media (max-width:480px) {
+  body { padding:1rem .75rem 3rem; }
+  .card { padding:1.5rem 1.25rem 2rem; }
+  .h1 { font-size:20px; } .qtext { font-size:15px; } .gn { width:130px; min-width:130px; }
+  .vmf-grid-r { grid-template-columns:100px repeat(4,minmax(0,1fr)); }
+}
 </style>
 </head>
 <body>
 <div class="card">
-  <div class="logo"><b>William Beasley</b> · Strategic Pricing · Discovery Session</div>
+<div class="logo"><b>William Beasley</b> · Strategic Pricing · Discovery Session</div>
 
-  <div class="screen on" id="s-intro">
-    <div class="tag">Pricing Discovery</div>
-    <div class="h1">Finding the balance.</div>
-    <div class="sub">Sustainable pricing lives at the intersection of three forces that constantly pull against each other.</div>
-    <div class="eq">
-      <div class="pill">Customer value</div><div class="x">x</div>
-      <div class="pill">Financial goals</div><div class="x">x</div>
-      <div class="pill">Competitive position</div>
-    </div>
-    <div class="sub">Eight questions across two tracks to answer these questions: Where is the value? Do you trust the system around it?</div>
-    <button class="btn-p on" id="begin-btn">Begin <i class="ti ti-arrow-right" style="font-size:14px;vertical-align:-2px"></i></button>
+<!-- INTRO -->
+<div class="screen on" id="s-intro">
+  <div class="tag">Pricing Discovery</div>
+  <div class="h1">Finding the balance.</div>
+  <div class="sub">Sustainable pricing lives at the intersection of three forces that constantly pull against each other.</div>
+  <div class="eq">
+    <div class="pill">Customer value</div><div class="x">x</div>
+    <div class="pill">Financial goals</div><div class="x">x</div>
+    <div class="pill">Competitive position</div>
   </div>
+  <div class="sub">Eight questions across two tracks: Where is the value? Do you trust the system around it?</div>
+  <button class="btn-p on" id="begin-btn">Begin <i class="ti ti-arrow-right" style="font-size:14px;vertical-align:-2px" aria-hidden="true"></i></button>
+</div>
 
-  <div class="screen" id="s-q">
-    <div class="prog-wrap"><div class="prog" id="prog"></div></div>
-    <div id="track-badge"></div>
-    <div class="qnum" id="qnum"></div>
-    <div class="qtext" id="qtext"></div>
-    <div class="qsub" id="qsub"></div>
+<!-- QUESTIONS -->
+<div class="screen" id="s-q">
+  <div class="prog-wrap"><div class="prog" id="prog"></div></div>
+  <div id="track-badge"></div>
+  <div class="qnum" id="qnum"></div>
+  <div class="qtext" id="qtext"></div>
+  <div class="qsub" id="qsub"></div>
+  <div id="skipped-banner-area"></div>
+  <div id="q-content">
     <div class="vtabs" id="vtabs"></div>
     <div class="split-row" id="split"></div>
     <div class="opts" id="opts"></div>
-    <div class="brow">
-      <button class="btn-g" id="bbk">Back</button>
-      <button class="btn-p" id="bnx">Next</button>
+    <div class="na-voter-row">
+      <button class="btn-na-voter" id="btn-na-voter">N/A for this person</button>
     </div>
   </div>
-
-  <div class="screen" id="s-result">
-    <div class="rh">Based on what I'm hearing</div>
-    <div class="rt" id="rt"></div>
-    <div class="rb" id="rb"></div>
-    <div class="firebox">
-      <div class="fire-lbl">This cannot wait</div>
-      <div class="fire-title">Sales needs something to quote. Today.</div>
-      <div class="fire-items">
-        <div class="fi"><div class="fi-dot"></div><div class="fi-text">Interim SKU: <b>AI Interaction Bundle</b> , configurable in CPQ within 2 weeks</div></div>
-        <div class="fi"><div class="fi-dot"></div><div class="fi-text">Price: per-resolution consumption above base threshold , list price to be confirmed, placeholder rate available immediately</div></div>
-        <div class="fi"><div class="fi-dot"></div><div class="fi-text">Discount authority: standard band applies until Pricing Council sets AI-specific guardrails</div></div>
-        <div class="fi"><div class="fi-dot"></div><div class="fi-text">Exception routing: anything above $X ACV goes to Deal Desk , no rep-level improvisation</div></div>
-      </div>
+  <div class="brow">
+    <div class="brow-left">
+      <button class="btn-g" id="bbk">Back</button>
+      <button class="btn-skip" id="btn-skip">Skip question</button>
     </div>
-    <div class="monbox">
-      <div class="mon-lbl">What the room told me about value</div>
-      <div class="mon-text" id="mon-text"></div>
-    </div>
-    <div class="hbox"><div class="hlbl">What I heard on gaps</div><div class="htxt" id="ht"></div></div>
-    <div id="tarea"></div>
-    <div class="clbl" style="margin-bottom:.6rem">Where the gaps are showing up</div>
-    <div id="gbars"></div>
-    <div class="pcard">
-      <div class="clbl">Where I would focus first</div>
-      <div class="pname" id="pname"></div>
-      <div id="caps"></div>
-    </div>
-    <button class="reset" id="restart-btn">Back to start</button>
+    <button class="btn-p" id="bnx">Next</button>
   </div>
 </div>
 
-<script>
-var ROLES = ['CEO', 'CFO', 'Chief Product Officer', 'Sales Executive'];
-var L = ['A', 'B', 'C', 'D'];
+<!-- RESULTS -->
+<div class="screen" id="s-result">
 
-var QS = [
-  {
-    track: 'M',
-    t: "Think about and describe the value Mpower Agents and Autopilot delivers to a customer.",
-    s: "Not how it is priced today. What the product is actually worth to the customer.",
-    o: [
-      { l: "Cost reduction - fewer agents, lower operational overhead",          sc: {M_cost:3} },
-      { l: "Revenue enablement - faster resolution, better customer retention",  sc: {M_rev:3} },
-      { l: "Risk reduction - fewer escalations, compliance coverage",            sc: {M_risk:3} },
-      { l: "All three. It is genuinely multi-dimensional value.",                sc: {M_multi:3} }
-    ]
-  },
-  {
-    track: 'M',
-    t: "What does the current pricing model fail to capture?",
-    s: "Be specific if you can. This is the gap I am most interested in.",
-    o: [
-      { l: "High-volume customers pay the same as low-volume ones. No scale alignment.",    sc: {M_gap_vol:3, A:2} },
-      { l: "Outcome value is not reflected in price (containment rates, CSAT lift).",    sc: {M_gap_out:3, A:2} },
-      { l: "The AI story is strong but Sales cannot translate it into a number.",           sc: {M_gap_sales:3, SE:2} },
-      { l: "Honestly we are not sure. We have not measured it rigorously.",                sc: {M_gap_unknown:3, I:2} }
-    ]
-  },
-  {
-    track: 'M',
-    t: "What is the biggest pricing risk NiCE faces in the next 12 months?",
-    s: "The rtesponse you select represents what keeps you up at night.",
-    o: [
-      { l: "We under-price AI and leave significant ARR on the table.",                    sc: {M_risk_under:3, A:2} },
-      { l: "We over-price AI, adoption stalls, and the platform story weakens.",           sc: {M_risk_over:3, SE:1} },
-      { l: "Competitors define the pricing category and we are forced to respond.",        sc: {M_risk_comp:3, A:2} },
-      { l: "Sales discounts aggressively to close deals and we never establish a floor.",  sc: {M_risk_disc:3, G:2} }
-    ]
-  },
-  {
-    track: 'G',
-    t: "Sales loses a deal and says it was price. What happens next?",
-    s: "Walk me through the process, or the lack of one.",
-    o: [
-      { l: "We adjust the discount and move on. No formal debrief.",            sc: {G:2} },
-      { l: "We log it and review at a quarterly business review.",              sc: {I:2} },
-      { l: "It depends on the rep. There is no consistent process.",           sc: {G:3} },
-      { l: "Win/loss feeds directly back into pricing strategy.",              sc: {A:1} }
-    ]
-  },
-  {
-    track: 'G',
-    t: "If I pulled your three best Sales reps and asked them to explain CXone AI pricing in one sentence, what would they say?",
-    s: "Not what you would want them to say. What they would actually say.",
-    o: [
-      { l: "Three different things. There would be no consistent answer across the team.",  sc: {SE:3} },
-      { l: "They would describe features, not the value to the customer.",                 sc: {A:2} },
-      { l: "They would lead with the discount they have room to offer.",                   sc: {G:2} },
-      { l: "A pretty consistent answer, with variation at the edges.",                    sc: {SE:1} }
-    ]
-  },
-  {
-    track: 'G',
-    t: "When Finance sets a margin target for an AI product or portfolio, how does that number get pressure-tested against what customers will actually pay?",
-    s: "Walk me through how that conversation happens in practice.",
-    o: [
-      { l: "It does not. Finance sets it and we work backward from there.",         sc: {A:3} },
-      { l: "Sales pushes back if it feels off, but there is no data behind it.",   sc: {I:2} },
-      { l: "We do competitive benchmarking to sanity-check the number.",           sc: {I:2} },
-      { l: "We have a willingness-to-pay research process.",                       sc: {A:1} }
-    ]
-  },
-  {
-    track: 'G',
-    t: "Who has the authority to say no to a deal because the pricing is wrong?",
-    s: "In practice, who stops it?",
-    o: [
-      { l: "Nobody. It escalates but usually goes through.",                        sc: {G:3} },
-      { l: "Finance technically, but they rarely block a deal.",                   sc: {G:2} },
-      { l: "Deal Desk, but it is inconsistently applied across the team.",         sc: {SE:2} },
-      { l: "A clear escalation matrix that is actually followed.",                 sc: {I:1} }
-    ]
-  },
-  {
-    track: 'U',
-    t: "If a Sales rep is closing a Mpower Agent deal right now, what do they put in the CPQ field for AI pricing?",
-    s: "This is the most important question in the session.",
-    o: [
-      { l: "We have a defined SKU and consistent price they quote.",                                             sc: {U_ok:1} },
-      { l: "It varies by rep. They use their best judgment on each deal.",                                       sc: {U_chaos:3} },
-      { l: "It goes to Deal Desk for their recommendation. They iron out these kinks.",                          sc: {U_desk:2} },
-      { l: "It goes to Product Pricing for their recommendation. They iron out these kinks.",                    sc: {U_none:3} }
-    ]
-  }
+  <!-- 1. PIVOT -->
+  <div class="res-section">
+    <div class="res-lbl" style="margin-top:1rem">Based on what I'm hearing</div>
+    <div class="res-title" id="rt"></div>
+    <div class="res-body" id="rb"></div>
+  </div>
+
+  <!-- 2. MONETIZATION + LIVE VALUE METRIC FRAMEWORK -->
+  <div class="mon-section">
+    <div class="mon-header" id="mon-toggle-btn" onclick="toggleMonExpand()">
+      <span class="mon-lbl">What the room told me about value</span>
+      <button class="btn-expand" tabindex="-1">
+        <span id="expand-label">See pricing architecture</span>
+        <i class="ti ti-chevron-down" id="expand-icon" aria-hidden="true"></i>
+      </button>
+    </div>
+    <div class="mon-summary" id="mon-text"></div>
+    <div class="mon-expand mon-expand-hidden" id="mon-expand">
+      <p class="vmf-intro-r">Adjust the product profile below. Toggles are pre-set from your answers. Each change recalculates the recommended model live.</p>
+      <div class="vmf-toggles" id="vmf-toggles"></div>
+      <div class="vmf-grid-r" id="vmf-grid-r"></div>
+      <div class="vmf-verdict-r" id="vmf-verdict-r"></div>
+      <div class="cpq-rec" id="cpq-rec"></div>
+    </div>
+  </div>
+
+  <!-- 3. GAPS -->
+  <div class="gap-section">
+    <div class="res-lbl">Where the gaps are showing up</div>
+    <div class="hbox"><div class="hlbl">What I heard</div><div class="htxt" id="ht"></div></div>
+    <div id="tarea"></div>
+    <div id="gbars"></div>
+  </div>
+
+  <!-- 4. FOCUS PILLARS -->
+  <div>
+    <div class="res-lbl">Where I would focus</div>
+    <div class="pcard" id="pcard1">
+      <span class="pillar-badge">First priority</span>
+      <div class="pname" id="pname1"></div>
+      <div id="caps1"></div>
+    </div>
+    <div class="pcard second" id="pcard2">
+      <span class="pillar-badge second">And then</span>
+      <div class="pname" id="pname2"></div>
+      <div id="caps2"></div>
+    </div>
+    <div class="override-bar" id="override-bar">
+      <div class="override-lbl">Override focus areas</div>
+    </div>
+  </div>
+
+  <!-- 5. FIRE BOX -->
+  <div class="firebox">
+    <div class="fire-lbl">This cannot wait</div>
+    <div class="fire-title">Sales needs something to quote. Today.</div>
+    <div class="fire-items">
+      <div class="fi"><div class="fi-dot"></div><div class="fi-text">Interim SKU: <b>AI Interaction Bundle</b> , configurable in CPQ within 2 weeks</div></div>
+      <div class="fi"><div class="fi-dot"></div><div class="fi-text">Price: per-resolution consumption above base threshold , list price confirmed by Pricing Council, placeholder rate available immediately</div></div>
+      <div class="fi"><div class="fi-dot"></div><div class="fi-text">Discount authority: standard band applies until Pricing Council sets AI-specific guardrails</div></div>
+      <div class="fi"><div class="fi-dot"></div><div class="fi-text">Exception routing: anything above $X ACV goes to Deal Desk , no rep-level improvisation</div></div>
+    </div>
+    <button class="btn-bundle-expand" id="btn-bundle-expand" onclick="toggleBundle()">
+      <i class="ti ti-layout-grid" aria-hidden="true"></i>
+      <span id="bundle-expand-label">See the AI Interaction Bundle</span>
+      <i class="ti ti-chevron-down" id="bundle-expand-icon" aria-hidden="true"></i>
+    </button>
+    <div class="bundle-illustration bundle-hidden" id="bundle-illustration">
+
+      <!-- THREE LAYER STACK -->
+      <div class="aib-stack">
+        <div class="aib-layer aib-l1">
+          <div class="aib-layer-tag">Layer 1 , preserve</div>
+          <div class="aib-layer-name">Platform Base</div>
+          <div class="aib-layer-desc">CXone seat-based license , routing, WFM, QA, omnichannel. Existing commercial motion. No disruption.</div>
+          <div class="aib-badge">Per seat , ARR anchor</div>
+        </div>
+        <div class="aib-layer aib-l2">
+          <div class="aib-layer-tag">Layer 2 , primary AI model</div>
+          <div class="aib-layer-name">AI Interaction Bundle</div>
+          <div class="aib-layer-desc">Consumption layer above the seat base. Every AI-resolved interaction above the monthly threshold is priced here.</div>
+          <div class="aib-badge aib-badge-now">Configurable now</div>
+          <div class="aib-caps-row">
+            <div class="aib-cap"><div class="aib-cap-name">Mpower Agents</div><div class="aib-cap-sub">End-to-end autonomous</div></div>
+            <div class="aib-cap"><div class="aib-cap-name">Autopilot</div><div class="aib-cap-sub">Self-service containment</div></div>
+            <div class="aib-cap"><div class="aib-cap-name">Copilot</div><div class="aib-cap-sub">Agent-assisted</div></div>
+          </div>
+          <div class="aib-detail-grid">
+            <div class="aib-detail-card"><div class="aib-dc-lbl">Value metric</div><div class="aib-dc-val">AI Resolutions / month</div></div>
+            <div class="aib-detail-card"><div class="aib-dc-lbl">Billing</div><div class="aib-dc-val">Base threshold + overage bands</div></div>
+            <div class="aib-detail-card"><div class="aib-dc-lbl">SKU</div><div class="aib-dc-val">AI Interaction Bundle</div></div>
+            <div class="aib-detail-card"><div class="aib-dc-lbl">Revenue</div><div class="aib-dc-val">Scales with adoption</div></div>
+          </div>
+        </div>
+        <div class="aib-layer aib-l3">
+          <div class="aib-layer-tag">Layer 3 , build now, launch 12-18 months</div>
+          <div class="aib-layer-name">Outcome Premium</div>
+          <div class="aib-layer-desc">Enterprise contracts on measurable results , containment rate, cost-per-case, CSAT lift. Requires instrumentation.</div>
+          <div class="aib-badge">18-month horizon</div>
+        </div>
+      </div>
+
+      <!-- TIER TABLE -->
+      <div class="aib-section-lbl">Consumption tier structure</div>
+      <table class="aib-table">
+        <thead>
+          <tr><th>Tier</th><th>Monthly resolutions</th><th>Included</th><th>Overage</th><th>Authority</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><span class="tp tp-bronze">Bronze</span></td><td>Up to 5,000</td><td>2,000</td><td>$X per 100</td><td>Standard</td></tr>
+          <tr class="aib-row-hero"><td><span class="tp tp-silver">Silver</span></td><td>5,001 , 25,000</td><td>5,000</td><td>$X-10% per 100</td><td>Standard</td></tr>
+          <tr><td><span class="tp tp-gold">Gold</span></td><td>25,001 , 100,000</td><td>15,000</td><td>$X-20% per 100</td><td>Manager</td></tr>
+          <tr><td><span class="tp tp-ent">Enterprise</span></td><td>100,000+</td><td>Negotiated</td><td>Negotiated</td><td>Deal Desk + VP</td></tr>
+        </tbody>
+      </table>
+
+      <!-- CPQ FLOW -->
+      <div class="aib-section-lbl">How a deal flows through CPQ</div>
+      <div class="aib-flow">
+        <div class="aib-flow-node">
+          <div class="aib-fn-label">Select seat tier</div>
+          <div class="aib-fn-sub">Existing motion</div>
+        </div>
+        <div class="aib-flow-arrow"><i class="ti ti-arrow-right" aria-hidden="true"></i></div>
+        <div class="aib-flow-node aib-fn-active">
+          <div class="aib-fn-label">Add AI Bundle</div>
+          <div class="aib-fn-sub">Bronze / Silver / Gold</div>
+        </div>
+        <div class="aib-flow-arrow"><i class="ti ti-arrow-right" aria-hidden="true"></i></div>
+        <div class="aib-flow-node">
+          <div class="aib-fn-label">CPQ auto-prices</div>
+          <div class="aib-fn-sub">Within standard band</div>
+        </div>
+        <div class="aib-flow-arrow"><i class="ti ti-arrow-right" aria-hidden="true"></i></div>
+        <div class="aib-flow-node aib-fn-warn">
+          <div class="aib-fn-label">Enterprise flag</div>
+          <div class="aib-fn-sub">Deal Desk + VP</div>
+        </div>
+      </div>
+
+      <!-- TIMELINE -->
+      <div class="aib-section-lbl">From this room to market</div>
+      <div class="aib-timeline">
+        <div class="aib-tl aib-tl-now"><div class="aib-tl-time">Today</div><div class="aib-tl-label">Decision</div></div>
+        <div class="aib-tl"><div class="aib-tl-time">Week 1-2</div><div class="aib-tl-label">CPQ SKU live</div></div>
+        <div class="aib-tl"><div class="aib-tl-time">Day 30-60</div><div class="aib-tl-label">Full tier structure</div></div>
+        <div class="aib-tl"><div class="aib-tl-time">Month 3-6</div><div class="aib-tl-label">Realization tracking</div></div>
+        <div class="aib-tl"><div class="aib-tl-time">Month 12-18</div><div class="aib-tl-label">Outcome Premium</div></div>
+      </div>
+
+    </div>
+  </div>
+
+  <button class="reset" id="restart-btn">Back to start</button>
+</div>
+</div>
+
+<script>
+var ROLES=['CEO','CFO','Chief Product Officer','Sales Executive'];
+var L=['A','B','C','D'];
+var NA_V='na', SKIP_Q='skip';
+
+var QS=[
+  { track:'M', t:"Think about and describe the value Mpower Agents and Autopilot delivers to a customer.", s:"Not how it is priced today. What the product is actually worth to the customer.",
+    o:[{l:"Cost reduction , fewer agents, lower operational overhead",sc:{M_cost:3}},{l:"Revenue enablement , faster resolution, better customer retention",sc:{M_rev:3}},{l:"Risk reduction , fewer escalations, compliance coverage",sc:{M_risk:3}},{l:"All three. It is genuinely multi-dimensional value.",sc:{M_multi:3}}] },
+  { track:'M', t:"What does the current pricing model fail to capture?", s:"Be specific if you can. This is the gap I am most interested in.",
+    o:[{l:"High-volume customers pay the same as low-volume ones. No scale alignment.",sc:{M_gap_vol:3,A:2}},{l:"Outcome value is not reflected in price (containment rates, CSAT lift).",sc:{M_gap_out:3,A:2}},{l:"The AI story is strong but Sales cannot translate it into a number.",sc:{M_gap_sales:3,SE:2}},{l:"Honestly we are not sure. We have not measured it rigorously.",sc:{M_gap_unknown:3,I:2}}] },
+  { track:'M', t:"What is the biggest pricing risk NiCE faces in the next 12 months?", s:"The response you select represents what keeps you up at night.",
+    o:[{l:"We under-price AI and leave significant ARR on the table.",sc:{M_risk_under:3,A:2}},{l:"We over-price AI, adoption stalls, and the platform story weakens.",sc:{M_risk_over:3,SE:1}},{l:"Competitors define the pricing category and we are forced to respond.",sc:{M_risk_comp:3,A:2}},{l:"Sales discounts aggressively to close deals and we never establish a floor.",sc:{M_risk_disc:3,G:2}}] },
+  { track:'G', t:"Sales loses a deal and says it was price. What happens next?", s:"Walk me through the process, or the lack of one.",
+    o:[{l:"We adjust the discount and move on. No formal debrief.",sc:{G:2}},{l:"We log it and review at a quarterly business review.",sc:{I:2}},{l:"It depends on the rep. There is no consistent process.",sc:{G:3}},{l:"Win/loss feeds directly back into pricing strategy.",sc:{A:1}}] },
+  { track:'G', t:"If I pulled your three best Sales reps and asked them to explain CXone AI pricing in one sentence, what would they say?", s:"Not what you would want them to say. What they would actually say.",
+    o:[{l:"Three different things. There would be no consistent answer across the team.",sc:{SE:3}},{l:"They would describe features, not the value to the customer.",sc:{A:2}},{l:"They would lead with the discount they have room to offer.",sc:{G:2}},{l:"A pretty consistent answer, with variation at the edges.",sc:{SE:1}}] },
+  { track:'G', t:"When Finance sets a margin target for an AI product or portfolio, how does that number get pressure-tested against what customers will actually pay?", s:"Walk me through how that conversation happens in practice.",
+    o:[{l:"It does not. Finance sets it and we work backward from there.",sc:{A:3}},{l:"Sales pushes back if it feels off, but there is no data behind it.",sc:{I:2}},{l:"We do competitive benchmarking to sanity-check the number.",sc:{I:2}},{l:"We have a willingness-to-pay research process.",sc:{A:1}}] },
+  { track:'G', t:"Who has the authority to say no to a deal because the pricing is wrong?", s:"In practice, who stops it?",
+    o:[{l:"Nobody. It escalates but usually goes through.",sc:{G:3}},{l:"Finance technically, but they rarely block a deal.",sc:{G:2}},{l:"Deal Desk, but it is inconsistently applied across the team.",sc:{SE:2}},{l:"A clear escalation matrix that is actually followed.",sc:{I:1}}] },
+  { track:'U', t:"If a Sales rep is closing a Mpower Agent deal right now, what do they put in the CPQ field for AI pricing?", s:"This is the most important question in the session.",
+    o:[{l:"We have a defined SKU and consistent price they quote.",sc:{U_ok:1}},{l:"It varies by rep. They use their best judgment on each deal.",sc:{U_chaos:3}},{l:"It goes to Deal Desk for their recommendation. They iron out these kinks.",sc:{U_desk:2}},{l:"It goes to Product Pricing for their recommendation. They iron out these kinks.",sc:{U_none:3}}] }
 ];
 
-var PL = {
-  A: {
-    name: "Strategy and Architecture",
-    title: "The foundation needs resetting before anything else gets built.",
-    body: "The value metric is undefined or misaligned. Everything downstream , the sales motion, the governance, the analytics , is compensating for a gap that should not exist.",
-    hearing: "The pricing model is not keeping pace with the value delivered. Customers extracting dramatically more from AI products are not showing up differently in revenue. That is structural misalignment and it is the first thing to fix.",
-    caps: ["Value metric definition , establishing what you actually charge on and why", "Pricing architecture , seat base plus consumption layer plus outcome premium", "Competitive value gap quantification , where NiCE's differentiation holds at the table"]
-  },
-  G: {
-    name: "Governance and Operations",
-    title: "The strategy exists. The system around it is not protecting it.",
-    body: "Every deal becomes a negotiation. Every exception becomes a precedent. The model may be right but without governance it drifts at the speed of Sales pressure.",
-    hearing: "Pricing decisions are happening without a clear owner. Discounting is the de facto strategy. Authority is theoretical. The fix is the infrastructure that protects the model you have.",
-    caps: ["Pricing Council , decision rights, monthly cadence, SOX compliance", "Discount band architecture , guardrails Sales can work within, not around", "Approval matrix and escalation , who says no, when, and what happens next"]
-  },
-  SE: {
-    name: "Systems and Enablement",
-    title: "The architecture is sound. It is not reaching the field.",
-    body: "A pricing strategy that Sales cannot execute is a nice document. The gap is in the translation layer between the model and the moment a rep is in front of a customer.",
-    hearing: "The model exists but breaks down in execution. Reps are improvising. CPQ does not support the AI pricing motion. The customer experience of your pricing is inconsistent and that has a clear fix.",
-    caps: ["CPQ configuration , Mpower Agent consumption tiers in a quotable format", "Sales enablement , TCO calculators, battlecards, Pricing Office Hours", "Launch process , pricing embedded in the stage-gate before release"]
-  },
-  I: {
-    name: "Intelligence and Analytics",
-    title: "Decisions are being made without a feedback loop.",
-    body: "You are flying without instruments. The model may be working or drifting but there is no systematic way to know which.",
-    hearing: "Pricing decisions are informed by instinct and competitive reaction more than data. Win/loss patterns are not feeding back into strategy. Realization is not being tracked. The opportunity is building the intelligence layer.",
-    caps: ["Price realization tracking , list vs. pocket price by segment and AI tier", "Win/loss analysis , distinguishing price losses from positioning losses from rep losses", "Churn and retention analysis , identifying where pricing is creating risk"]
-  }
+var PL={
+  A:{name:"Strategy and Architecture",title:"The foundation needs resetting before anything else gets built.",body:"The value metric is undefined or misaligned. Everything downstream , the sales motion, the governance, the analytics , is compensating for a gap that should not exist.",hearing:"The pricing model is not keeping pace with value delivered. Customers extracting dramatically more from AI products are not showing up differently in revenue. That is structural misalignment and it is the first thing to fix.",caps:["Value metric definition , establishing what you actually charge on and why","Pricing architecture , seat base plus consumption layer plus outcome premium","Competitive value gap quantification , where NiCE's differentiation holds at the table"]},
+  G:{name:"Governance and Operations",title:"The strategy exists. The system around it is not protecting it.",body:"Every deal becomes a negotiation. Every exception becomes a precedent. The model may be right but without governance it drifts at the speed of Sales pressure.",hearing:"Pricing decisions are happening without a clear owner. Discounting is the de facto strategy. Authority is theoretical. The fix is the infrastructure that protects the model you have.",caps:["Pricing Council , decision rights, monthly cadence, SOX compliance","Discount band architecture , guardrails Sales can work within, not around","Approval matrix and escalation , who says no, when, and what happens next"]},
+  SE:{name:"Systems and Enablement",title:"The architecture is sound. It is not reaching the field.",body:"A pricing strategy that Sales cannot execute is a nice document. The gap is in the translation layer between the model and the moment a rep is in front of a customer.",hearing:"The model exists but breaks down in execution. Reps are improvising. CPQ does not support the AI pricing motion. The customer experience of your pricing is inconsistent and that has a clear fix.",caps:["CPQ configuration , Mpower Agent consumption tiers in a quotable format","Sales enablement , TCO calculators, battlecards, Pricing Office Hours","Launch process , pricing embedded in the stage-gate before release"]},
+  I:{name:"Intelligence and Analytics",title:"Decisions are being made without a feedback loop.",body:"You are flying without instruments. The model may be working or drifting but there is no systematic way to know which.",hearing:"Pricing decisions are informed by instinct and competitive reaction more than data. Win/loss patterns are not feeding back into strategy. Realization is not being tracked. The opportunity is building the intelligence layer.",caps:["Price realization tracking , list vs. pocket price by segment and AI tier","Win/loss analysis , distinguishing price losses from positioning losses from rep losses","Churn and retention analysis , identifying where pricing is creating risk"]}
+};
+var PL_NAMES={A:"Strategy and Architecture",G:"Governance and Operations",SE:"Systems and Enablement",I:"Intelligence and Analytics"};
+var TRACK_META={M:{label:"Track 1 · Monetization",cls:"track-m"},G:{label:"Track 2 · Organizational Gaps",cls:"track-g"},U:{label:"Track 3 · Operational Urgency",cls:"track-u"}};
+
+/* ── VALUE METRIC FRAMEWORK DATA ── */
+var VMF_DIMS=[
+  {id:'val_align',  label:'Value alignment',       desc:'Revenue scales with value?'},
+  {id:'sales_exec', label:'Sales executability',   desc:'Quotable in CPQ now?'},
+  {id:'fin_pred',   label:'Financial predictability',desc:'Finance can forecast ARR?'},
+  {id:'cust_acc',   label:'Customer acceptance',   desc:'Procurement will understand it?'},
+  {id:'comp_def',   label:'Competitive defense',   desc:'Reinforces differentiation?'},
+  {id:'scale',      label:'Scale economics',       desc:'Margin improves as usage grows?'},
+];
+var VMF_MODELS=[
+  {id:'seat',label:'Per seat',     color:'#378ADD',cls:'c-seat'},
+  {id:'res', label:'Per resolution',color:'#1D9E75',cls:'c-res'},
+  {id:'out', label:'Per outcome',  color:'#BA7517',cls:'c-out'},
+  {id:'hyb', label:'Hybrid (base + consumption)',color:'#7F77DD',cls:'c-hyb'},
+];
+var VMF_BASE={
+  seat:{val_align:2,sales_exec:5,fin_pred:5,cust_acc:5,comp_def:2,scale:2},
+  res: {val_align:5,sales_exec:4,fin_pred:3,cust_acc:4,comp_def:4,scale:4},
+  out: {val_align:5,sales_exec:2,fin_pred:2,cust_acc:3,comp_def:5,scale:5},
+  hyb: {val_align:4,sales_exec:4,fin_pred:4,cust_acc:4,comp_def:4,scale:4},
+};
+var VMF_MODS={
+  ai_auto:    {seat:{val_align:-2,comp_def:-1},res:{val_align:1},out:{val_align:1,comp_def:1}},
+  var_usage:  {seat:{val_align:-2,scale:-2},res:{val_align:2,scale:2},hyb:{scale:1}},
+  legacy_seats:{seat:{sales_exec:1,fin_pred:1},hyb:{sales_exec:1,cust_acc:1}},
+  measurable: {out:{sales_exec:1,cust_acc:1,comp_def:1},res:{comp_def:1}},
+  fin_predict:{seat:{fin_pred:1},hyb:{fin_pred:1},res:{fin_pred:-1},out:{fin_pred:-2}},
+  sales_simple:{seat:{sales_exec:1},res:{sales_exec:1},out:{sales_exec:-2}},
+};
+var VMF_VERDICTS={
+  hyb:'A base plus consumption hybrid is the right architecture for this profile. It preserves ARR predictability for Finance through the committed base, captures upside from high-value customers through consumption overage, and gives Sales a quotable rate card. This is the model NiCE can configure in CPQ within weeks.',
+  res:'Per-resolution consumption aligns revenue directly with AI value delivered. Customers who extract more pay more , proportionally and transparently. This model scales cleanly as agentic AI adoption grows and gives Sales a clear metric: every AI-resolved interaction above the base threshold has a defined price.',
+  out:'An outcome-based model delivers the strongest value alignment and competitive differentiation, but requires measurement infrastructure and customer baselines before it can be quoted. This is the right 18-month destination. It should not be the immediate go-to-market motion.',
+  seat:'Seat-based pricing is least aligned with agentic AI value delivery. It was designed for a world where AI assists agents, not replaces interactions. The profile inputs likely understate usage variance and outcome measurability.',
+};
+var VMF_CPQ={
+  hyb:{title:'CPQ configuration: Hybrid model',items:['Base tier: per-seat platform license (existing motion, no disruption)','Consumption layer: AI Interaction Bundle SKU , per-resolution overage above monthly threshold','Threshold tiers: Bronze / Silver / Gold resolution bands , list prices to be set by Pricing Council','Discount authority: standard band on base, separate guardrails on consumption overage','Go-live timeline: interim SKU configurable within 2 weeks, full tier structure within 60 days']},
+  res:{title:'CPQ configuration: Per-resolution model',items:['Primary SKU: AI Resolution Pack , priced per 1,000 resolutions per month','Base allocation: X resolutions included per seat , overages billed at listed rate','Volume bands: configure discount steps at 10K / 50K / 100K+ monthly resolutions','Deal Desk trigger: any deal above $Y ACV or non-standard resolution definition requires escalation','Go-live timeline: single SKU configurable within 2 weeks']},
+  out:{title:'CPQ configuration: Outcome model (build now, launch 12-18 months)',items:['Instrumentation first: baseline measurement infrastructure required before pricing can be set','Pilot structure: 3-5 enterprise logos with agreed KPIs (containment rate, cost-per-case, CSAT)','Shared-risk pricing: minimum guarantee plus outcome bonus above agreed threshold','SKU placeholder: create Outcome Premium SKU in CPQ now, lock pricing pending pilot data','Timeline: measurement infrastructure 0-6 months, pilot 6-12 months, scale 12-18 months']},
+  seat:{title:'CPQ configuration: Seat model (transition recommended)',items:['Near-term: maintain existing seat SKUs to avoid contract disruption','Flag all AI-heavy customers for consumption model migration conversation at renewal','Design migration path: preferred per-resolution model for new logos, legacy bridge for existing','Build the CPQ consumption SKU in parallel while seat contracts run out','Timeline: consumption SKU live within 60 days, active migration motion at next renewal cycle']},
 };
 
-var PL_NAMES = { A: "Strategy and Architecture", G: "Governance and Operations", SE: "Systems and Enablement", I: "Intelligence and Analytics" };
-var TRACK_META = {
-  M: { label: "Track 1 · Monetization", cls: "track-m" },
-  G: { label: "Track 2 · Organizational Gaps", cls: "track-g" },
-  U: { label: "Track 3 · Operational Urgency", cls: "track-u" }
-};
+/* toggle state for VMF inside result */
+var vmfActive={ai_auto:false,var_usage:false,legacy_seats:false,measurable:false,fin_predict:false,sales_simple:false};
+var monExpanded=false;
 
-function monInsight(s) {
-  var val = s.M_multi ? "multi-dimensional" : s.M_cost ? "cost-reduction focused" : s.M_rev ? "revenue-enabling" : "risk-reduction focused";
-  var gap = s.M_gap_vol ? "high-volume customers are not paying more than low-volume ones" : s.M_gap_out ? "outcome value , containment rates, CSAT lift , is not reflected anywhere in the contract" : s.M_gap_sales ? "the value story is strong but Sales cannot translate it into a defensible number" : "the gap has not been rigorously measured yet, which is itself the gap";
-  var risk = s.M_risk_under ? "under-pricing AI and leaving ARR on the table" : s.M_risk_over ? "over-pricing and stalling adoption" : s.M_risk_comp ? "competitors defining the pricing category before NiCE does" : "Sales discounting without a floor until the model is commoditized";
-  return "The room described the product value as " + val + ". The biggest uncaptured gap: " + gap + ". The risk they named: " + risk + ". That combination tells me exactly where to start.";
+function toggleMonExpand(){
+  monExpanded=!monExpanded;
+  document.getElementById('mon-expand').classList.toggle('mon-expand-hidden',!monExpanded);
+  document.getElementById('expand-label').textContent=monExpanded?'Hide model':'See pricing architecture';
+  document.getElementById('expand-icon').className=monExpanded?'ti ti-chevron-up':'ti ti-chevron-down';
+  if(monExpanded) renderVMF();
 }
 
-var cq = 0, av = 0;
-var votes = QS.map(function() { return ROLES.map(function() { return null; }); });
-
-function show(id) {
-  document.querySelectorAll('.screen').forEach(function(s) { s.classList.remove('on'); });
-  document.getElementById(id).classList.add('on');
+function vmfToggle(id){
+  vmfActive[id]=!vmfActive[id];
+  document.querySelector('[data-vmf="'+id+'"]').classList.toggle('on',vmfActive[id]);
+  renderVMF();
 }
 
-function renderQ() {
-  var q = QS[cq];
-  document.getElementById('prog').style.width = Math.round((cq / QS.length) * 100) + '%';
-  var tm = TRACK_META[q.track];
-  document.getElementById('track-badge').innerHTML = '<span class="track-label ' + tm.cls + '">' + tm.label + '</span>';
-  document.getElementById('qnum').textContent = 'Question ' + (cq + 1) + ' of ' + QS.length;
-  document.getElementById('qtext').textContent = q.t;
-  document.getElementById('qsub').textContent = q.s;
-  document.getElementById('bbk').style.visibility = cq === 0 ? 'hidden' : 'visible';
+function vmfClamp(v){return Math.min(5,Math.max(1,v));}
 
-  var allDone = votes[cq].every(function(v) { return v !== null; });
-  var nx = document.getElementById('bnx');
-  nx.textContent = cq === QS.length - 1 ? 'See results' : 'Next';
-  nx.className = 'btn-p' + (allDone ? ' on' : '');
+function vmfScores(){
+  var sc={};
+  VMF_MODELS.forEach(function(m){
+    sc[m.id]={};
+    VMF_DIMS.forEach(function(d){sc[m.id][d.id]=VMF_BASE[m.id][d.id];});
+  });
+  Object.keys(vmfActive).forEach(function(k){
+    if(!vmfActive[k])return;
+    var mods=VMF_MODS[k]||{};
+    Object.keys(mods).forEach(function(mid){
+      Object.keys(mods[mid]).forEach(function(did){
+        sc[mid][did]=vmfClamp(sc[mid][did]+mods[mid][did]);
+      });
+    });
+  });
+  return sc;
+}
 
-  var tabs = document.getElementById('vtabs');
-  tabs.innerHTML = '';
-  ROLES.forEach(function(r, i) {
-    var d = document.createElement('div');
-    var done = votes[cq][i] !== null;
-    d.className = 'vtab' + (i === av ? ' av' : '') + (done ? ' done' : '');
-    d.innerHTML = r + '<span class="dk"></span>';
-    d.addEventListener('click', (function(idx) { return function() { av = idx; renderQ(); }; })(i));
+function renderVMF(){
+  var sc=vmfScores();
+  var totals={};
+  VMF_MODELS.forEach(function(m){totals[m.id]=Object.values(sc[m.id]).reduce(function(a,b){return a+b;},0);});
+  var winner=VMF_MODELS.slice().sort(function(a,b){return totals[b.id]-totals[a.id];})[0].id;
+
+  /* rebuild toggles */
+  var tDefs=[
+    {id:'ai_auto',label:'Agentic / autonomous AI'},
+    {id:'var_usage',label:'High usage variance'},
+    {id:'legacy_seats',label:'Existing seat contracts'},
+    {id:'measurable',label:'Measurable outcomes'},
+    {id:'fin_predict',label:'Finance needs ARR predictability'},
+    {id:'sales_simple',label:'Sales needs to quote now'},
+  ];
+  var tHtml='';
+  tDefs.forEach(function(t){
+    tHtml+='<div class="vmf-toggle'+(vmfActive[t.id]?' on':'')+'" data-vmf="'+t.id+'" onclick="vmfToggle(\''+t.id+'\')">'+t.label+'</div>';
+  });
+  document.getElementById('vmf-toggles').innerHTML=tHtml;
+
+  /* rebuild grid */
+  var gHtml='';
+  gHtml+='<div class="vmf-cell hdr dim">Dimension</div>';
+  VMF_MODELS.forEach(function(m){
+    var isW=m.id===winner;
+    gHtml+='<div class="vmf-cell hdr'+(isW?' win':'')+'">'+m.label+(isW?'<br><span class="win-tag">recommended</span>':'')+'</div>';
+  });
+  VMF_DIMS.forEach(function(d,di){
+    var last=di===VMF_DIMS.length-1;
+    gHtml+='<div class="vmf-cell dim'+(last?' last':'')+'">'+d.label+'<br><span style="font-size:10px;font-weight:400;color:var(--text3)">'+d.desc+'</span></div>';
+    VMF_MODELS.forEach(function(m){
+      var v=sc[m.id][d.id];
+      var pct=Math.round((v/5)*100);
+      gHtml+='<div class="vmf-cell'+(last?' last':'')+'"><span style="font-weight:500;color:var(--text)">'+v+'/5</span><div class="sb"><div class="sf" style="width:'+pct+'%;background:'+m.color+'"></div></div></div>';
+    });
+  });
+  document.getElementById('vmf-grid-r').innerHTML=gHtml;
+
+  /* verdict */
+  var wModel=VMF_MODELS.find(function(m){return m.id===winner;});
+  document.getElementById('vmf-verdict-r').innerHTML='<span style="font-weight:500">'+wModel.label+'.</span> '+VMF_VERDICTS[winner];
+
+  /* CPQ recommendation */
+  var cpq=VMF_CPQ[winner];
+  var cpqHtml='<div class="cpq-lbl">CPQ development conversation</div><div class="cpq-title">'+cpq.title+'</div><div class="cpq-items">';
+  cpq.items.forEach(function(item){
+    cpqHtml+='<div class="cpq-item"><div class="cpq-dot"></div><div class="cpq-text">'+item+'</div></div>';
+  });
+  cpqHtml+='</div>';
+  document.getElementById('cpq-rec').innerHTML=cpqHtml;
+}
+
+/* map Track 1 answers to VMF toggles */
+function setVMFFromAnswers(mS){
+  vmfActive.ai_auto=true; /* always on for NiCE context */
+  vmfActive.var_usage=(mS.M_gap_vol>0||mS.M_multi>0);
+  vmfActive.legacy_seats=false;
+  vmfActive.measurable=(mS.M_gap_out>0||mS.M_multi>0);
+  vmfActive.fin_predict=(mS.M_risk_under>0);
+  vmfActive.sales_simple=true; /* always on given urgency question context */
+}
+
+function monInsight(s){
+  var val=s.M_multi?"multi-dimensional":s.M_cost?"cost-reduction focused":s.M_rev?"revenue-enabling":"risk-reduction focused";
+  var gap=s.M_gap_vol?"high-volume customers are not paying more than low-volume ones":s.M_gap_out?"outcome value , containment rates, CSAT lift , is not reflected anywhere in the contract":s.M_gap_sales?"the value story is strong but Sales cannot translate it into a defensible number":"the gap has not been rigorously measured yet, which is itself the gap";
+  var risk=s.M_risk_under?"under-pricing AI and leaving ARR on the table":s.M_risk_over?"over-pricing and stalling adoption":s.M_risk_comp?"competitors defining the pricing category before NiCE does":"Sales discounting without a floor until the model is commoditized";
+  return "The room described the product value as "+val+". The biggest uncaptured gap: "+gap+". The risk they named: "+risk+".";
+}
+
+/* ── SESSION STATE ── */
+var cq=0,av=0;
+var votes=QS.map(function(){return ROLES.map(function(){return null;});});
+
+function show(id){document.querySelectorAll('.screen').forEach(function(s){s.classList.remove('on');});document.getElementById(id).classList.add('on');}
+
+function isSkipped(qi){return votes[qi].every(function(v){return v===SKIP_Q;});}
+function isComplete(qi){return votes[qi].every(function(v){return v!==null;});}
+
+function renderQ(){
+  var q=QS[cq];
+  document.getElementById('prog').style.width=Math.round((cq/QS.length)*100)+'%';
+  var tm=TRACK_META[q.track];
+  document.getElementById('track-badge').innerHTML='<span class="track-label '+tm.cls+'">'+tm.label+'</span>';
+  document.getElementById('qnum').textContent='Question '+(cq+1)+' of '+QS.length;
+  document.getElementById('qtext').textContent=q.t;
+  document.getElementById('qsub').textContent=q.s;
+  document.getElementById('bbk').style.visibility=cq===0?'hidden':'visible';
+  var complete=isComplete(cq);
+  var nx=document.getElementById('bnx');
+  nx.textContent=cq===QS.length-1?'See results':'Next';
+  nx.className='btn-p'+(complete?' on':'');
+  var skipped=isSkipped(cq);
+  var ba=document.getElementById('skipped-banner-area');
+  var qc=document.getElementById('q-content');
+  if(skipped){
+    ba.innerHTML='<div class="skipped-banner"><span class="skipped-text">This question was skipped</span><button class="btn-unskip" id="btn-unskip">Restore</button></div>';
+    qc.style.display='none';
+    document.getElementById('btn-unskip').addEventListener('click',function(){votes[cq]=ROLES.map(function(){return null;});av=0;renderQ();});
+  }else{ba.innerHTML='';qc.style.display='block';}
+  if(skipped)return;
+  var tabs=document.getElementById('vtabs');
+  tabs.innerHTML='';
+  ROLES.forEach(function(r,i){
+    var v=votes[cq][i];
+    var done=v!==null,isNA=v===NA_V;
+    var d=document.createElement('div');
+    d.className='vtab'+(i===av?' av':'')+(done?' done':'')+(isNA?' na-voter':'');
+    d.innerHTML=r+'<span class="dk"></span>';
+    d.addEventListener('click',(function(idx){return function(){av=idx;renderQ();};})(i));
     tabs.appendChild(d);
   });
-
-  var sp = document.getElementById('split');
-  var answered = votes[cq].map(function(v, i) { return v !== null ? { r: ROLES[i], a: L[v] } : null; }).filter(Boolean);
-  if (!answered.length) { sp.innerHTML = ''; } else {
-    var grp = {};
-    answered.forEach(function(a) { if (!grp[a.a]) grp[a.a] = []; grp[a.a].push(a.r); });
-    var conflict = Object.keys(grp).length > 1;
-    sp.innerHTML = Object.entries(grp).map(function(e) { return '<div class="sc' + (conflict ? ' diff' : '') + '">' + e[0] + ': ' + e[1].join(', ') + '</div>'; }).join('');
-  }
-
-  var oc = document.getElementById('opts');
-  oc.innerHTML = '';
-  q.o.forEach(function(o, i) {
-    var d = document.createElement('div');
-    d.className = 'opt' + (votes[cq][av] === i ? ' sel' : '');
-    d.innerHTML = '<div class="ol">' + L[i] + '</div><div class="ot">' + o.l + '</div>';
-    d.addEventListener('click', (function(idx) {
-      return function() {
-        votes[cq][av] = idx;
-        var nxt = votes[cq].findIndex(function(v) { return v === null; });
-        if (nxt !== -1) av = nxt;
-        renderQ();
-      };
-    })(i));
+  var sp=document.getElementById('split');
+  var answered=votes[cq].map(function(v,i){return(v!==null&&v!==NA_V&&v!==SKIP_Q)?{r:ROLES[i],a:L[v]}:null;}).filter(Boolean);
+  var naVoters=votes[cq].map(function(v,i){return v===NA_V?ROLES[i]:null;}).filter(Boolean);
+  var parts=[];
+  if(answered.length){var grp={};answered.forEach(function(a){if(!grp[a.a])grp[a.a]=[];grp[a.a].push(a.r);});var conflict=Object.keys(grp).length>1;parts=Object.entries(grp).map(function(e){return'<div class="sc'+(conflict?' diff':'')+'">'+e[0]+': '+e[1].join(', ')+'</div>';});}
+  if(naVoters.length)parts.push('<div class="sc na">N/A: '+naVoters.join(', ')+'</div>');
+  sp.innerHTML=parts.join('');
+  var curNA=votes[cq][av]===NA_V;
+  var oc=document.getElementById('opts');
+  oc.innerHTML='';
+  q.o.forEach(function(o,i){
+    var d=document.createElement('div');
+    var sel=!curNA&&votes[cq][av]===i;
+    d.className='opt'+(sel?' sel':'');
+    d.style.opacity=curNA?'0.4':'1';
+    d.style.pointerEvents=curNA?'none':'auto';
+    d.innerHTML='<div class="ol">'+L[i]+'</div><div class="ot">'+o.l+'</div>';
+    d.addEventListener('click',(function(idx){return function(){votes[cq][av]=idx;var nxt=votes[cq].findIndex(function(v){return v===null;});if(nxt!==-1)av=nxt;renderQ();};})(i));
     oc.appendChild(d);
   });
+  var naBtn=document.getElementById('btn-na-voter');
+  naBtn.textContent=curNA?'Remove N/A':'N/A for this person';
+  naBtn.className='btn-na-voter'+(curNA?' active':'');
 }
 
-function goBack() { if (cq === 0) return; cq--; av = 0; renderQ(); }
-
-function goNext() {
-  if (!votes[cq].every(function(v) { return v !== null; })) return;
-  if (cq === QS.length - 1) { buildResult(); return; }
-  cq++;
-  av = votes[cq].findIndex(function(v) { return v === null; });
-  if (av === -1) av = 0;
+function goBack(){if(cq===0)return;cq--;av=0;renderQ();}
+function goNext(){
+  if(!isComplete(cq))return;
+  if(cq===QS.length-1){buildResult();return;}
+  cq++;av=votes[cq].findIndex(function(v){return v===null;});if(av===-1)av=0;renderQ();
+}
+function skipQuestion(){
+  votes[cq]=ROLES.map(function(){return SKIP_Q;});renderQ();
+  setTimeout(function(){
+    if(cq<QS.length-1){cq++;av=votes[cq].findIndex(function(v){return v===null;});if(av===-1)av=0;}
+    else buildResult();
+    renderQ();
+  },420);
+}
+function setVoterNA(){
+  var cur=votes[cq][av];
+  if(cur===NA_V){votes[cq][av]=null;}
+  else{votes[cq][av]=NA_V;var nxt=votes[cq].findIndex(function(v){return v===null;});if(nxt!==-1)av=nxt;}
   renderQ();
 }
 
-function buildResult() {
+function buildResult(){
   show('s-result');
-  var tot = { A: 0, G: 0, SE: 0, I: 0 };
-  var mS = { M_cost:0, M_rev:0, M_risk:0, M_multi:0, M_gap_vol:0, M_gap_out:0, M_gap_sales:0, M_gap_unknown:0, M_risk_under:0, M_risk_over:0, M_risk_comp:0, M_risk_disc:0 };
-  var vt = ROLES.map(function() { return { A: 0, G: 0, SE: 0, I: 0 }; });
+  monExpanded=false;
+  document.getElementById('mon-expand').classList.add('mon-expand-hidden');
+  document.getElementById('expand-label').textContent='See pricing architecture';
+  document.getElementById('expand-icon').className='ti ti-chevron-down';
 
-  votes.forEach(function(qv, qi) {
-    qv.forEach(function(v, vi) {
-      if (v === null) return;
-      var sc = QS[qi].o[v].sc;
-      Object.keys(sc).forEach(function(k) {
-        if (k in tot) { tot[k] += sc[k]; vt[vi][k] += sc[k]; }
-        if (k in mS) mS[k] += sc[k];
+  var tot={A:0,G:0,SE:0,I:0};
+  var mS={M_cost:0,M_rev:0,M_risk:0,M_multi:0,M_gap_vol:0,M_gap_out:0,M_gap_sales:0,M_gap_unknown:0,M_risk_under:0,M_risk_over:0,M_risk_comp:0,M_risk_disc:0};
+  var vt=ROLES.map(function(){return{A:0,G:0,SE:0,I:0};});
+
+  votes.forEach(function(qv,qi){
+    qv.forEach(function(v,vi){
+      if(v===null||v===NA_V||v===SKIP_Q)return;
+      var sc=QS[qi].o[v].sc;
+      Object.keys(sc).forEach(function(k){
+        if(k in tot){tot[k]+=sc[k];vt[vi][k]+=sc[k];}
+        if(k in mS)mS[k]+=sc[k];
       });
     });
   });
 
-  var sorted = Object.entries(tot).sort(function(a, b) { return b[1] - a[1]; });
-  var topK = sorted[0][0];
-  var total = Math.max(1, Object.values(tot).reduce(function(a, b) { return a + b; }, 0));
-  var p = PL[topK];
+  var sorted=Object.entries(tot).sort(function(a,b){return b[1]-a[1];});
+  var topK=sorted[0][0];
+  var total=Math.max(1,Object.values(tot).reduce(function(a,b){return a+b;},0));
+  var p=PL[topK];
 
-  document.getElementById('rt').textContent = p.title;
-  document.getElementById('rb').textContent = p.body;
-  document.getElementById('ht').textContent = p.hearing;
-  document.getElementById('pname').textContent = p.name;
-  document.getElementById('mon-text').textContent = monInsight(mS);
+  document.getElementById('rt').textContent=p.title;
+  document.getElementById('rb').textContent=p.body;
+  document.getElementById('ht').textContent=p.hearing;
+  document.getElementById('mon-text').textContent=monInsight(mS);
 
-  var voterTop = vt.map(function(v, i) {
-    var s = Object.entries(v).sort(function(a, b) { return b[1] - a[1]; });
-    return { role: ROLES[i], top: s[0][0] };
-  });
-  var topKeys = [...new Set(voterTop.map(function(v) { return v.top; }))];
-  var ta = document.getElementById('tarea');
-  if (topKeys.length > 1) {
-    var grp = {};
-    voterTop.forEach(function(v) { if (!grp[v.top]) grp[v.top] = []; grp[v.top].push(v.role); });
-    var txt = Object.entries(grp).map(function(e) { return e[1].join(' and ') + ' see a ' + PL_NAMES[e[0]] + ' gap'; }).join(', while ') + '. That tension is itself a data point worth discussing.';
-    ta.innerHTML = '<div class="tbox"><div class="tlbl">Tension detected</div><div class="ttxt">' + txt + '</div></div>';
-  } else { ta.innerHTML = ''; }
+  /* set VMF toggles from answers */
+  setVMFFromAnswers(mS);
 
-  var gb = document.getElementById('gbars');
-  gb.innerHTML = '';
-  sorted.forEach(function(entry) {
-    var k = entry[0], v = entry[1];
-    var pct = Math.round((v / total) * 100);
-    var isTop = k === topK;
-    var here = ROLES.filter(function(_, vi) {
-      var s = Object.entries(vt[vi]).sort(function(a, b) { return b[1] - a[1]; });
-      return s[0][0] === k;
-    });
-    gb.innerHTML += '<div class="brow-g"><div class="gr"><div class="gn' + (isTop ? ' top' : '') + '">' + PL_NAMES[k] + '</div><div class="gt"><div class="gf' + (isTop ? ' top' : '') + '" style="width:' + pct + '%"></div></div><div class="gp">' + pct + '%</div></div>' + (here.length ? '<div class="vc">' + here.map(function(r) { return '<div class="vch">' + r + '</div>'; }).join('') + '</div>' : '') + '</div>';
+  /* tension detection */
+  var voterTop=vt.map(function(v,i){var s=Object.entries(v).sort(function(a,b){return b[1]-a[1];});return{role:ROLES[i],top:s[0][0]};});
+  var topKeys=[...new Set(voterTop.map(function(v){return v.top;}))];
+  var ta=document.getElementById('tarea');
+  if(topKeys.length>1){var grp={};voterTop.forEach(function(v){if(!grp[v.top])grp[v.top]=[];grp[v.top].push(v.role);});var txt=Object.entries(grp).map(function(e){return e[1].join(' and ')+' see a '+PL_NAMES[e[0]]+' gap';}).join(', while ')+'. That tension is itself a data point worth discussing.';ta.innerHTML='<div class="tbox"><div class="tlbl">Tension detected</div><div class="ttxt">'+txt+'</div></div>';}
+  else ta.innerHTML='';
+
+  /* gap bars */
+  var gb=document.getElementById('gbars');
+  gb.innerHTML='';
+  sorted.forEach(function(entry){
+    var k=entry[0],v=entry[1];
+    var pct=Math.round((v/total)*100);
+    var isTop=k===topK;
+    var here=ROLES.filter(function(_,vi){var s=Object.entries(vt[vi]).sort(function(a,b){return b[1]-a[1];});return s[0][0]===k;});
+    gb.innerHTML+='<div class="brow-g"><div class="gr"><div class="gn'+(isTop?' top':'')+'">'+PL_NAMES[k]+'</div><div class="gt"><div class="gf'+(isTop?' top':'')+'" style="width:'+pct+'%"></div></div><div class="gp">'+pct+'%</div></div>'+(here.length?'<div class="vc">'+here.map(function(r){return'<div class="vch">'+r+'</div>';}).join('')+'</div>':'')+' </div>';
   });
 
-  var cl = document.getElementById('caps');
-  cl.innerHTML = p.caps.map(function(c) { return '<div class="ci"><div class="cd"></div><div class="ct">' + c + '</div></div>'; }).join('');
+  /* pillar cards */
+  window._topK1=sorted[0][0];
+  window._topK2=sorted[1]?sorted[1][0]:sorted[0][0];
+  renderPillarCards(window._topK1,window._topK2);
+  renderOverrideBar(window._topK1,window._topK2);
 }
 
-function restart() {
-  cq = 0; av = 0;
-  votes = QS.map(function() { return ROLES.map(function() { return null; }); });
+function renderPillarCards(k1,k2){
+  var p1=PL[k1],p2=PL[k2];
+  document.getElementById('pname1').textContent=p1.name;
+  document.getElementById('caps1').innerHTML=p1.caps.map(function(c){return'<div class="ci"><div class="cd"></div><div class="ct">'+c+'</div></div>';}).join('');
+  document.getElementById('pname2').textContent=p2.name;
+  document.getElementById('caps2').innerHTML=p2.caps.map(function(c){return'<div class="ci"><div class="cd" style="background:var(--text3)"></div><div class="ct" style="color:var(--text2)">'+c+'</div></div>';}).join('');
+}
+
+function renderOverrideBar(k1,k2){
+  var bar=document.getElementById('override-bar');
+  var lbl='<div class="override-lbl">Override focus areas</div>';
+  var btns=Object.keys(PL).map(function(k){var cls=k===k1?' sel1':k===k2?' sel2':'';return'<button class="btn-override'+cls+'" data-k="'+k+'">'+PL_NAMES[k]+'</button>';}).join('');
+  bar.innerHTML=lbl+btns;
+  bar.querySelectorAll('.btn-override').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      var k=this.getAttribute('data-k');
+      if(k===window._topK1)return;
+      if(k===window._topK2){var tmp=window._topK1;window._topK1=window._topK2;window._topK2=tmp;}
+      else window._topK2=k;
+      renderPillarCards(window._topK1,window._topK2);
+      renderOverrideBar(window._topK1,window._topK2);
+    });
+  });
+}
+
+function restart(){
+  cq=0;av=0;
+  votes=QS.map(function(){return ROLES.map(function(){return null;});});
   show('s-intro');
 }
 
-document.getElementById('begin-btn').addEventListener('click', function() { show('s-q'); renderQ(); });
-document.getElementById('bbk').addEventListener('click', goBack);
-document.getElementById('bnx').addEventListener('click', goNext);
-document.getElementById('restart-btn').addEventListener('click', restart);
+function toggleBundle(){
+  var el=document.getElementById('bundle-illustration');
+  var hidden=el.classList.toggle('bundle-hidden');
+  document.getElementById('bundle-expand-label').textContent=hidden?'See the AI Interaction Bundle':'Hide bundle detail';
+  document.getElementById('bundle-expand-icon').className=hidden?'ti ti-chevron-down':'ti ti-chevron-up';
+}
+
+document.getElementById('begin-btn').addEventListener('click',function(){show('s-q');renderQ();});
+document.getElementById('bbk').addEventListener('click',goBack);
+document.getElementById('bnx').addEventListener('click',goNext);
+document.getElementById('btn-na-voter').addEventListener('click',setVoterNA);
+document.getElementById('btn-skip').addEventListener('click',skipQuestion);
+document.getElementById('restart-btn').addEventListener('click',restart);
 </script>
 </body>
 </html>
