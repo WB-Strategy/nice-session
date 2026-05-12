@@ -175,30 +175,30 @@ var L = ['A', 'B', 'C', 'D'];
 var QS = [
   {
     track: 'M',
-    t: "Think about the value Mpower Agents and Autopilot deliver to a customer. What is the fairest way to describe it?",
-    s: "Not how it is priced today. What the product is actually worth to them.",
+    t: "Think about and describe the value Mpower Agents and Autopilot delivers to a customer.",
+    s: "Not how it is priced today. What the product is actually worth to the customer.",
     o: [
-      { l: "Cost reduction , fewer agents, lower operational overhead",          sc: {M_cost:3} },
-      { l: "Revenue enablement , faster resolution, better customer retention",  sc: {M_rev:3} },
-      { l: "Risk reduction , fewer escalations, compliance coverage",            sc: {M_risk:3} },
+      { l: "Cost reduction - fewer agents, lower operational overhead",          sc: {M_cost:3} },
+      { l: "Revenue enablement - faster resolution, better customer retention",  sc: {M_rev:3} },
+      { l: "Risk reduction - fewer escalations, compliance coverage",            sc: {M_risk:3} },
       { l: "All three. It is genuinely multi-dimensional value.",                sc: {M_multi:3} }
     ]
   },
   {
     track: 'M',
-    t: "What part of that value do you think your current pricing model is failing to capture?",
+    t: "What does the current pricing model fail to capture?",
     s: "Be specific if you can. This is the gap I am most interested in.",
     o: [
       { l: "High-volume customers pay the same as low-volume ones. No scale alignment.",    sc: {M_gap_vol:3, A:2} },
-      { l: "Outcome value , containment rates, CSAT lift , is not reflected in price.",    sc: {M_gap_out:3, A:2} },
+      { l: "Outcome value is not reflected in price (containment rates, CSAT lift).",    sc: {M_gap_out:3, A:2} },
       { l: "The AI story is strong but Sales cannot translate it into a number.",           sc: {M_gap_sales:3, SE:2} },
       { l: "Honestly we are not sure. We have not measured it rigorously.",                sc: {M_gap_unknown:3, I:2} }
     ]
   },
   {
     track: 'M',
-    t: "Name the single biggest pricing risk NiCE faces in the next 12 months. What is it?",
-    s: "The answer that keeps you up at night.",
+    t: "What is the biggest pricing risk NiCE faces in the next 12 months?",
+    s: "The rtesponse you select represents what keeps you up at night.",
     o: [
       { l: "We under-price AI and leave significant ARR on the table.",                    sc: {M_risk_under:3, A:2} },
       { l: "We over-price AI, adoption stalls, and the platform story weakens.",           sc: {M_risk_over:3, SE:1} },
@@ -219,7 +219,7 @@ var QS = [
   },
   {
     track: 'G',
-    t: "If I pulled your three best Sales reps in right now and asked them to explain CXone AI pricing in one sentence, what would they say?",
+    t: "If I pulled your three best Sales reps and asked them to explain CXone AI pricing in one sentence, what would they say?",
     s: "Not what you would want them to say. What they would actually say.",
     o: [
       { l: "Three different things. There would be no consistent answer across the team.",  sc: {SE:3} },
