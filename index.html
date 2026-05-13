@@ -236,6 +236,16 @@ button { padding:.52rem 1.15rem; border-radius:var(--radius-sm); font-size:13px;
 .aib-tl-now { background:rgba(220,38,38,0.12); }
 .aib-tl-now .aib-tl-time { color:#DC2626; }
 .aib-tl-now .aib-tl-label { color:#DC2626; }
+.names-screen { }
+.names-title { font-size:18px; font-weight:500; color:var(--text); margin-bottom:.3rem; }
+.names-sub { font-size:13px; color:var(--text2); line-height:1.6; margin-bottom:1.4rem; }
+.names-rows { display:flex; flex-direction:column; gap:.65rem; margin-bottom:1.5rem; }
+.names-row { display:grid; grid-template-columns:160px 1fr; gap:.65rem; align-items:center; }
+.names-role { font-size:12px; font-weight:500; color:var(--text3); text-transform:uppercase; letter-spacing:.06em; }
+.names-input { padding:.48rem .75rem; font-size:14px; font-weight:400; color:var(--text); background:var(--bg); border:0.5px solid var(--border2); border-radius:var(--radius-sm); font-family:inherit; width:100%; transition:border-color .15s; }
+.names-input:focus { outline:none; border-color:var(--teal); }
+.names-input::placeholder { color:var(--text3); font-style:italic; }
+
 @media (max-width:480px) {
   body { padding:1rem .75rem 3rem; }
   .card { padding:1.5rem 1.25rem 2rem; }
@@ -248,8 +258,34 @@ button { padding:.52rem 1.15rem; border-radius:var(--radius-sm); font-size:13px;
 <div class="card">
 <div class="logo"><b>William Beasley</b> · Strategic Pricing · Discovery Session</div>
 
+<!-- NAMES -->
+<div class="screen on" id="s-names">
+  <div class="tag">Before we begin</div>
+  <div class="names-title">Who is in the room?</div>
+  <div class="names-sub">Add a first name for each role. They will appear on every question so you can track each perspective individually.</div>
+  <div class="names-rows">
+    <div class="names-row">
+      <div class="names-role">CEO</div>
+      <input class="names-input" id="name-0" type="text" placeholder="First name" autocomplete="off" spellcheck="false">
+    </div>
+    <div class="names-row">
+      <div class="names-role">CFO</div>
+      <input class="names-input" id="name-1" type="text" placeholder="First name" autocomplete="off" spellcheck="false">
+    </div>
+    <div class="names-row">
+      <div class="names-role">Chief Product Officer</div>
+      <input class="names-input" id="name-2" type="text" placeholder="First name" autocomplete="off" spellcheck="false">
+    </div>
+    <div class="names-row">
+      <div class="names-role">Sales Executive</div>
+      <input class="names-input" id="name-3" type="text" placeholder="First name" autocomplete="off" spellcheck="false">
+    </div>
+  </div>
+  <button class="btn-p on" id="names-next-btn">Continue <i class="ti ti-arrow-right" style="font-size:14px;vertical-align:-2px" aria-hidden="true"></i></button>
+</div>
+
 <!-- INTRO -->
-<div class="screen on" id="s-intro">
+<div class="screen" id="s-intro">
   <div class="tag">Pricing Discovery</div>
   <div class="h1">Finding the balance.</div>
   <div class="sub">Sustainable pricing lives at the intersection of three forces that constantly pull against each other.</div>
@@ -448,7 +484,16 @@ button { padding:.52rem 1.15rem; border-radius:var(--radius-sm); font-size:13px;
 </div>
 
 <script>
+var ROLE_LABELS=['CEO','CFO','Chief Product Officer','Sales Executive'];
+var ROLE_NAMES=['','','',''];
 var ROLES=['CEO','CFO','Chief Product Officer','Sales Executive'];
+
+function buildRoleLabels(){
+  ROLES=ROLE_LABELS.map(function(r,i){
+    var n=ROLE_NAMES[i].trim();
+    return n ? r+' ('+n+')' : r;
+  });
+}
 var L=['A','B','C','D'];
 var NA_V='na', SKIP_Q='skip';
 
@@ -805,8 +850,14 @@ function renderOverrideBar(k1,k2){
 
 function restart(){
   cq=0;av=0;
+  ROLE_NAMES=['','','',''];
+  ROLES=['CEO','CFO','Chief Product Officer','Sales Executive'];
   votes=QS.map(function(){return ROLES.map(function(){return null;});});
-  show('s-intro');
+  ['name-0','name-1','name-2','name-3'].forEach(function(id){
+    var el=document.getElementById(id);
+    if(el) el.value='';
+  });
+  show('s-names');
 }
 
 function toggleBundle(){
@@ -816,12 +867,32 @@ function toggleBundle(){
   document.getElementById('bundle-expand-icon').className=hidden?'ti ti-chevron-down':'ti ti-chevron-up';
 }
 
+document.getElementById('names-next-btn').addEventListener('click',function(){
+  ROLE_LABELS.forEach(function(_,i){
+    ROLE_NAMES[i]=document.getElementById('name-'+i).value||'';
+  });
+  buildRoleLabels();
+  votes=QS.map(function(){return ROLES.map(function(){return null;});});
+  show('s-intro');
+});
+
 document.getElementById('begin-btn').addEventListener('click',function(){show('s-q');renderQ();});
 document.getElementById('bbk').addEventListener('click',goBack);
 document.getElementById('bnx').addEventListener('click',goNext);
 document.getElementById('btn-na-voter').addEventListener('click',setVoterNA);
 document.getElementById('btn-skip').addEventListener('click',skipQuestion);
 document.getElementById('restart-btn').addEventListener('click',restart);
+
+// Allow Enter to advance from names screen
+document.querySelectorAll('.names-input').forEach(function(inp,i){
+  inp.addEventListener('keydown',function(e){
+    if(e.key==='Enter'){
+      var next=document.getElementById('name-'+(i+1));
+      if(next){ next.focus(); }
+      else { document.getElementById('names-next-btn').click(); }
+    }
+  });
+});
 </script>
 </body>
 </html>
